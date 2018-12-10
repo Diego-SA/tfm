@@ -1,10 +1,3 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Thu Dec  6 14:32:20 2018
-
-@author: Diego
-"""
-
 import pandas as pd
 import os
 import pickle

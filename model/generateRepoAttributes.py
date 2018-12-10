@@ -1,10 +1,3 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Thu Dec  6 00:58:59 2018
-
-@author: Diego
-"""
-
 from git import Repo
 import os
 
