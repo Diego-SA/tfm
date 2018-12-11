@@ -27,8 +27,6 @@ for project in projects:
             # ....Class.csv file
             if(file.endswith("Class.csv")) :
                 classdf = pd.read_csv(data + "/" + project + "/" + release + '/' + file)
-                # Delete non-numeric columns
-                classdf = classdf.drop(["ID", "Name", "LongName", "Parent", "Component", "Path"], axis=1)
                 
                 if (classes is None):
                     classes = classdf.copy()
@@ -38,9 +36,7 @@ for project in projects:
             #....File.csv file    
             elif(file.endswith("File.csv")):
                 filedf = pd.read_csv(data + "/" + project + "/" + release + '/' + file)
-                # Delete non-numeric columns
-                filedf = filedf.drop(["ID", "Name", "LongName", "Parent"], axis=1)
-                
+
                 if (files is None):
                     files = filedf.copy()
                 else:
@@ -50,9 +46,13 @@ for project in projects:
             else:
                 continue
 
-
+# Delete duplicate rows
 classes = classes.drop_duplicates()
 files = files.drop_duplicates()
+
+# Delete non-numeric columns
+classes = classes.drop(["ID", "Name", "LongName", "Parent", "Component", "Path"], axis=1)
+files = files.drop(["ID", "Name", "LongName", "Parent"], axis=1)
 
 # Write whole processed dataset into 1 file
 classes.to_csv(data_output + 'classes.csv', index = False)
