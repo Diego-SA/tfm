@@ -1,0 +1,577 @@
+[2018-12-05 19:11:20] Start:DirectoryBasedAnalysisTask
+GenericConfig 8.2.0 (build 8717#45192 Win64) - (C) 2001-2016 FrontEndART Ltd.
+INFO  org.jan.Main - JAN (build 8717#45192) - (C) 2001-2016 FrontEndART Ltd.
+INFO  org.jan.OptionParser - JAN options:
+INFO  org.jan.OptionParser -   columbusResultDir=.columbus_java
+INFO  org.jan.OptionParser -   hardFilter=
+INFO  org.jan.OptionParser -   messageLevel=3
+INFO  org.jan.OptionParser -   xmlToEveryClass=0
+INFO  org.jan.OptionParser -   needCheck=0
+INFO  org.jan.OptionParser -   keepComments=1
+INFO  org.jan.OptionParser -   buildAllExternal=0
+INFO  org.jan.OptionParser -   buildExtFromSource=1
+INFO  org.jan.OptionParser -   buildAllParentForOverrides=1
+INFO  org.jan.OptionParser - Switch the log level to 3.
+INFO  org.jan.JDKTreeMaker - Javac options:
+INFO  org.jan.JDKTreeMaker -   -bootclasspath
+INFO  org.jan.JDKTreeMaker -   C:\Program Files (x86)\Java\jre1.8.0_191\lib\resources.jar;C:\Program Files (x86)\Java\jre1.8.0_191\lib\rt.jar;C:\Program Files (x86)\Java\jre1.8.0_191\lib\sunrsasign.jar;C:\Program Files (x86)\Java\jre1.8.0_191\lib\jsse.jar;C:\Program Files (x86)\Java\jre1.8.0_191\lib\jce.jar;C:\Program Files (x86)\Java\jre1.8.0_191\lib\charsets.jar;C:\Program Files (x86)\Java\jre1.8.0_191\lib\jfr.jar;C:\Program Files (x86)\Java\jre1.8.0_191\classes
+INFO  org.jan.JDKTreeMaker -   -cp
+INFO  org.jan.JDKTreeMaker -   C:\Users\Diego\Downloads\SourceMeter-8.2.0-x64-windows\Java\WindowsWrapper\WrapperBins\Tools\vulnerability.jar;C:\Users\Diego\Downloads\SourceMeter-8.2.0-x64-windows\Java\WindowsWrapper\WrapperBins\Tools\android.jar
+INFO  org.jan.Main - Rebuild trees.
+INFO  org.jan.TreeBuilder - Source file: C:\Users\Diego\eclipse-workspace\AnalyzeMe\src\main\Analiza.java
+INFO  org.jan.TreeBuilder - Source file: C:\Users\Diego\eclipse-workspace\AnalyzeMe\src\main\Basic.java
+INFO  org.jan.Main - Build comments.
+INFO  org.jan.Main - Create external classes.
+INFO  org.jan.ExternalClassBuilder - First round in external class builder
+INFO  org.jan.ExternalClassBuilder - Building external type declaration: java.lang.System
+INFO  org.jan.ExternalClassBuilder - Building external type declaration: java.lang.String
+INFO  org.jan.ExternalClassBuilder - Building external type declaration: java.lang.String.CaseInsensitiveComparator
+INFO  org.jan.ExternalClassBuilder - Building external type declaration: java.lang.Object
+INFO  org.jan.ExternalClassBuilder - Building external type declaration: java.io.PrintStream
+INFO  org.jan.ExternalClassBuilder - Next round in external class builder
+INFO  org.jan.ExternalClassBuilder - Building external type declaration: java.io.InputStream
+INFO  org.jan.ExternalClassBuilder - Building external type declaration: java.lang.SecurityManager
+INFO  org.jan.ExternalClassBuilder - Building external type declaration: java.io.Console
+INFO  org.jan.ExternalClassBuilder - Building external type declaration: java.util.Properties
+INFO  org.jan.ExternalClassBuilder - Building external type declaration: java.io.IOException
+INFO  org.jan.ExternalClassBuilder - Building external type declaration: java.nio.channels.Channel
+INFO  org.jan.ExternalClassBuilder - Building external type declaration: java.util.Map
+INFO  org.jan.ExternalClassBuilder - Building external type declaration: java.lang.Deprecated
+INFO  org.jan.ExternalClassBuilder - Building external type declaration: sun.reflect.CallerSensitive
+INFO  org.jan.ExternalClassBuilder - Building external type declaration: java.io.FileOutputStream
+INFO  org.jan.ExternalClassBuilder - Building external type declaration: java.io.Serializable
+INFO  org.jan.ExternalClassBuilder - Building external type declaration: java.lang.Comparable
+INFO  org.jan.ExternalClassBuilder - Building external type declaration: java.lang.CharSequence
+INFO  org.jan.ExternalClassBuilder - Building external type declaration: java.util.Comparator
+INFO  org.jan.ExternalClassBuilder - Building external type declaration: java.io.ObjectStreamField
+INFO  org.jan.ExternalClassBuilder - Building external type declaration: java.io.UnsupportedEncodingException
+INFO  org.jan.ExternalClassBuilder - Building external type declaration: java.nio.charset.Charset
+INFO  org.jan.ExternalClassBuilder - Building external type declaration: java.lang.StringBuffer
+INFO  org.jan.ExternalClassBuilder - Building external type declaration: java.lang.StringBuilder
+INFO  org.jan.ExternalClassBuilder - Building external type declaration: java.lang.AbstractStringBuilder
+INFO  org.jan.ExternalClassBuilder - Building external type declaration: java.lang.Iterable
+INFO  org.jan.ExternalClassBuilder - Building external type declaration: java.util.Locale
+INFO  org.jan.ExternalClassBuilder - Building external type declaration: java.lang.Class
+INFO  org.jan.ExternalClassBuilder - Building external type declaration: java.lang.CloneNotSupportedException
+INFO  org.jan.ExternalClassBuilder - Building external type declaration: java.lang.InterruptedException
+INFO  org.jan.ExternalClassBuilder - Building external type declaration: java.lang.Throwable
+INFO  org.jan.ExternalClassBuilder - Building external type declaration: java.io.FilterOutputStream
+INFO  org.jan.ExternalClassBuilder - Building external type declaration: java.lang.Appendable
+INFO  org.jan.ExternalClassBuilder - Building external type declaration: java.io.Closeable
+INFO  org.jan.ExternalClassBuilder - Building external type declaration: java.util.Formatter
+INFO  org.jan.ExternalClassBuilder - Building external type declaration: java.io.BufferedWriter
+INFO  org.jan.ExternalClassBuilder - Building external type declaration: java.io.OutputStreamWriter
+INFO  org.jan.ExternalClassBuilder - Building external type declaration: java.io.OutputStream
+INFO  org.jan.ExternalClassBuilder - Building external type declaration: java.io.FileNotFoundException
+INFO  org.jan.ExternalClassBuilder - Building external type declaration: java.io.File
+INFO  org.jan.ExternalClassBuilder - Next round in external class builder
+INFO  org.jan.ExternalClassBuilder - Building external type declaration: java.io.Flushable
+INFO  org.jan.ExternalClassBuilder - Building external type declaration: java.util.Hashtable
+INFO  org.jan.ExternalClassBuilder - Building external type declaration: java.lang.Exception
+INFO  org.jan.ExternalClassBuilder - Building external type declaration: java.lang.annotation.Annotation
+INFO  org.jan.ExternalClassBuilder - Building external type declaration: java.lang.annotation.Documented
+INFO  org.jan.ExternalClassBuilder - Building external type declaration: java.lang.annotation.Retention
+INFO  org.jan.ExternalClassBuilder - Building external type declaration: java.lang.annotation.RetentionPolicy
+INFO  org.jan.ExternalClassBuilder - Building external type declaration: java.lang.annotation.Target
+INFO  org.jan.ExternalClassBuilder - Building external type declaration: java.lang.annotation.ElementType
+INFO  org.jan.ExternalClassBuilder - Building external type declaration: java.util.stream.IntStream
+INFO  org.jan.ExternalClassBuilder - Building external type declaration: java.util.function.Function
+INFO  org.jan.ExternalClassBuilder - Building external type declaration: java.util.function.ToIntFunction
+INFO  org.jan.ExternalClassBuilder - Building external type declaration: java.util.function.ToLongFunction
+INFO  org.jan.ExternalClassBuilder - Building external type declaration: java.util.function.ToDoubleFunction
+INFO  org.jan.ExternalClassBuilder - Building external type declaration: java.lang.FunctionalInterface
+INFO  org.jan.ExternalClassBuilder - Building external type declaration: java.lang.Cloneable
+INFO  org.jan.ExternalClassBuilder - Building external type declaration: java.lang.reflect.GenericDeclaration
+INFO  org.jan.ExternalClassBuilder - Building external type declaration: java.lang.reflect.Type
+INFO  org.jan.ExternalClassBuilder - Building external type declaration: java.lang.reflect.AnnotatedElement
+INFO  org.jan.ExternalClassBuilder - Building external type declaration: java.lang.AutoCloseable
+INFO  org.jan.ExternalClassBuilder - Building external type declaration: java.io.Writer
+INFO  org.jan.ExternalClassBuilder - Next round in external class builder
+INFO  org.jan.ExternalClassBuilder - Building external type declaration: java.util.Dictionary
+INFO  org.jan.ExternalClassBuilder - Fill external type declaration: java.lang.annotation.Annotation
+INFO  org.jan.ExternalClassBuilder - Building external type declaration: java.lang.Enum
+INFO  org.jan.ExternalClassBuilder - Building external type declaration: java.lang.Integer
+INFO  org.jan.ExternalClassBuilder - Building external type declaration: java.util.stream.BaseStream
+INFO  org.jan.ExternalClassBuilder - Next round in external class builder
+INFO  org.jan.ExternalClassBuilder - Building external type declaration: java.lang.ClassNotFoundException
+INFO  org.jan.ExternalClassBuilder - Building external type declaration: java.io.ObjectInputStream
+INFO  org.jan.ExternalClassBuilder - Building external type declaration: java.io.ObjectStreamException
+INFO  org.jan.ExternalClassBuilder - Building external type declaration: java.lang.Number
+INFO  org.jan.ExternalClassBuilder - Next round in external class builder
+INFO  org.jan.ExternalClassBuilder - Building external type declaration: java.lang.ReflectiveOperationException
+INFO  org.jan.ExternalClassBuilder - Building external type declaration: java.io.ObjectInput
+INFO  org.jan.ExternalClassBuilder - Building external type declaration: java.io.ObjectStreamConstants
+INFO  org.jan.ExternalClassBuilder - Next round in external class builder
+INFO  org.jan.ExternalClassBuilder - Building external type declaration: java.io.DataInput
+INFO  org.jan.Main - Set crossedges.
+INFO  org.jan.Main - Build types.
+INFO  org.jan.Main - Filter.
+INFO  org.jan.Main - Save jsi.
+INFO  org.jan.ClassSaver - Saved file timestamp: 1544033481527
+INFO  org.jan.Main - CPU times (s):
+INFO  org.jan.Main -   Total time: 0.453
+INFO  org.jan.Main -   JDK compile time: 0.234
+INFO  org.jan.Main -   Tree rebuilding time: 0.031
+INFO  org.jan.Main -   Comment building time: 0.015
+INFO  org.jan.Main -   External class building time: 0.046
+INFO  org.jan.Main -   Crossedge setting time: 0.015
+INFO  org.jan.Main -   Type building time: 0.0
+INFO  org.jan.Main -   ASG checking time: 0.0
+INFO  org.jan.Main -   Filter generating time: 0.015
+INFO  org.jan.Main -   Common jsi saving time: 0.015
+INFO  org.jan.Main -   Common jml saving time: 0.0
+INFO  org.jan.Main -   Small jsi saving time: 0.0
+INFO  org.jan.Main - User times (s):
+INFO  org.jan.Main -   Total time: 0.406
+INFO  org.jan.Main -   JDK compile time: 0.234
+INFO  org.jan.Main -   Tree rebuilding time: 0.031
+INFO  org.jan.Main -   Comment building time: 0.015
+INFO  org.jan.Main -   External class building time: 0.031
+INFO  org.jan.Main -   Crossedge setting time: 0.015
+INFO  org.jan.Main -   Type building time: 0.0
+INFO  org.jan.Main -   ASG checking time: 0.0
+INFO  org.jan.Main -   Filter generating time: 0.015
+INFO  org.jan.Main -   Common jsi saving time: 0.015
+INFO  org.jan.Main -   Common jml saving time: 0.0
+INFO  org.jan.Main -   Small jsi saving time: 0.0
+INFO  org.jan.Main - Memory statistics:
+INFO  org.jan.Main -   Max total memory: 22 MB
+INFO  org.jan.Main -   Max used memory: 17 MB
+INFO  org.jan.Main - Other statistics:
+INFO  org.jan.Main -   Analyzed files: 2
+INFO  org.jan.Main -   Warnings: 0
+INFO  org.jan.Main -   Errors: 0
+Loaded rule GenericsNaming
+Loaded rule NonThreadSafeSingleton
+Loaded rule UseVarargs
+Loaded rule UseAssertEqualsInsteadOfAssertTrue
+Loaded rule EmptyMethodInAbstractClassShouldBeAbstract
+Loaded rule EmptySynchronizedBlock
+Loaded rule ClassNamingConventions
+Loaded rule EqualsNull
+Loaded rule UselessOperationOnImmutable
+Loaded rule AvoidProtectedMethodInFinalClassNotExtending
+Loaded rule JUnitTestContainsTooManyAsserts
+Loaded rule ConsecutiveLiteralAppends
+Loaded rule UnnecessaryConstructor
+Loaded rule PreserveStackTrace
+Loaded rule ExceptionAsFlowControl
+Loaded rule FinalizeDoesNotCallSuperFinalize
+Loaded rule PackageCase
+Loaded rule UnconditionalIfStatement
+Loaded rule JUnitAssertionsShouldIncludeMessage
+Loaded rule FinalizeOverloaded
+Loaded rule FieldDeclarationsShouldBeAtStartOfClass
+Loaded rule AvoidDecimalLiteralsInBigDecimalConstructor
+Loaded rule EmptyCatchBlock
+Loaded rule AvoidCallingFinalize
+Loaded rule UnusedNullCheckInEquals
+Loaded rule BigIntegerInstantiation
+Loaded rule EmptyIfStmt
+Loaded rule AvoidPrintStackTrace
+Loaded rule PositionLiteralsFirstInCaseInsensitiveComparisons
+Loaded rule JUnitStaticSuite
+Loaded rule EmptyFinalizer
+Loaded rule ShortMethodName
+Loaded rule AvoidUsingHardCodedIP
+Loaded rule UnnecessaryConversionTemporary
+Loaded rule TooManyStaticImports
+Loaded rule ImmutableField
+Loaded rule AvoidCatchingNPE
+Loaded rule UnusedPrivateField
+Loaded rule RemoteInterfaceNamingConvention
+Loaded rule MoreThanOneLogger
+Loaded rule LooseCoupling
+Loaded rule BadComparison
+Loaded rule DontImportSun
+Loaded rule BooleanGetMethodName
+Loaded rule UseAssertTrueInsteadOfAssertEquals
+Loaded rule ArrayIsStoredDirectly
+Loaded rule DefaultLabelNotLastInSwitchStmt
+Loaded rule AvoidMultipleUnaryOperators
+Loaded rule WhileLoopsMustUseBraces
+Loaded rule SimplifyBooleanExpressions
+Loaded rule MissingBreakInSwitch
+Loaded rule AssignmentInOperand
+Loaded rule AvoidStringBufferField
+Loaded rule AssignmentToNonFinalStatic
+Loaded rule LocalInterfaceSessionNamingConvention
+Loaded rule OneDeclarationPerLine
+Loaded rule InefficientStringBuffering
+Loaded rule UncommentedEmptyMethod
+Loaded rule LoggerIsNotStaticFinal
+Loaded rule UnusedPrivateMethod
+Loaded rule SwitchStmtsShouldHaveDefault
+Loaded rule MisplacedNullCheck
+Loaded rule DoubleCheckedLocking
+Loaded rule AvoidPrefixingMethodParameters
+Loaded rule JUnitTestsShouldIncludeAssert
+Loaded rule AvoidRethrowingException
+Loaded rule AbstractClassWithoutAnyMethod
+Loaded rule DontCallThreadRun
+Loaded rule EmptyStatementNotInLoop
+Loaded rule ShortClassName
+Loaded rule BooleanInstantiation
+Loaded rule SimpleDateFormatNeedsLocale
+Loaded rule AvoidArrayLoops
+Loaded rule GuardLogStatement
+Loaded rule EmptyWhileStmt
+Loaded rule ExtendsObject
+Loaded rule StringBufferInstantiationWithChar
+Loaded rule DontUseFloatTypeForLoopIndices
+Loaded rule AvoidLosingExceptionInformation
+Loaded rule SuspiciousHashcodeMethodName
+Loaded rule TooFewBranchesForASwitchStatement
+Loaded rule UnnecessaryBooleanAssertion
+Loaded rule CollapsibleIfStatements
+Loaded rule DoNotExtendJavaLangError
+Loaded rule AvoidUsingOctalValues
+Loaded rule ClassCastExceptionWithToArray
+Loaded rule NonStaticInitializer
+Loaded rule UnnecessaryLocalBeforeReturn
+Loaded rule AvoidThrowingRawExceptionTypes
+Loaded rule SimplifyBooleanAssertion
+Loaded rule EmptyStaticInitializer
+Loaded rule AvoidCatchingThrowable
+Loaded rule CheckResultSet
+Loaded rule UseNotifyAllInsteadOfNotify
+Loaded rule ProperLogger
+Loaded rule UseAssertNullInsteadOfAssertTrue
+Loaded rule MethodReturnsInternalArray
+Loaded rule DoNotCallGarbageCollectionExplicitly
+Loaded rule SuspiciousConstantFieldName
+Loaded rule UnnecessaryWrapperObjectCreation
+Loaded rule FinalizeShouldBeProtected
+Loaded rule FinalizeOnlyCallsSuperFinalize
+Loaded rule DefaultPackage
+Loaded rule SystemPrintln
+Loaded rule OptimizableToArrayCall
+Loaded rule IdempotentOperations
+Loaded rule UseArraysAsList
+Loaded rule MethodWithSameNameAsEnclosingClass
+Loaded rule StringInstantiation
+Loaded rule DoNotThrowExceptionInFinally
+Loaded rule MethodNamingConventions
+Loaded rule UseEqualsToCompareStrings
+Loaded rule SingularField
+Loaded rule AvoidThreadGroup
+Loaded rule SimplifyBooleanReturns
+Loaded rule EmptyTryBlock
+Loaded rule CloneThrowsCloneNotSupportedException
+Loaded rule UnnecessaryCaseChange
+Loaded rule ReturnFromFinallyBlock
+Loaded rule AvoidProtectedFieldInFinalClass
+Loaded rule InstantiationToGetClass
+Loaded rule AvoidFieldNameMatchingMethodName
+Loaded rule VariableNamingConventions
+Loaded rule IfElseStmtsMustUseBraces
+Loaded rule UseCorrectExceptionLogging
+Loaded rule AvoidBranchingStatementAsLastInLoop
+Loaded rule TestClassWithoutTestCases
+Loaded rule ProperCloneImplementation
+Loaded rule AvoidAccessibilityAlteration
+Loaded rule AvoidThrowingNewInstanceOfSameException
+Loaded rule AvoidFieldNameMatchingTypeName
+Loaded rule NonCaseLabelInSwitchStatement
+Loaded rule NoPackage
+Loaded rule DoNotCallSystemExit
+Loaded rule GuardDebugLogging
+Loaded rule LogicInversion
+Loaded rule SuspiciousOctalEscape
+Loaded rule AvoidUsingNativeCode
+Loaded rule AddEmptyString
+Loaded rule UnnecessaryFullyQualifiedName
+Loaded rule RedundantFieldInitializer
+Loaded rule AvoidInstanceofChecksInCatchClause
+Loaded rule AbstractClassWithoutAbstractMethod
+Loaded rule FinalFieldCouldBeStatic
+Loaded rule UseArrayListInsteadOfVector
+Loaded rule GuardLogStatementJavaUtil
+Loaded rule DontImportJavaLang
+Loaded rule UseAssertSameInsteadOfAssertTrue
+Loaded rule EmptySwitchStatements
+Loaded rule ForLoopShouldBeWhileLoop
+Loaded rule StringToString
+Loaded rule UnusedLocalVariable
+Loaded rule UseStringBufferForStringAppends
+Loaded rule EmptyFinallyBlock
+Loaded rule CloseResource
+Loaded rule PositionLiteralsFirstInComparisons
+Loaded rule DuplicateImports
+Loaded rule StaticEJBFieldShouldBeFinal
+Loaded rule AvoidSynchronizedAtMethodLevel
+Loaded rule AvoidConstantsInterface
+Loaded rule SimplifyConditional
+Loaded rule CloneMethodMustImplementCloneable
+Loaded rule LocalHomeNamingConvention
+Loaded rule CheckSkipResult
+Loaded rule AvoidCatchingGenericException
+Loaded rule ConstructorCallsOverridableMethod
+Loaded rule BrokenNullCheck
+Loaded rule UnusedImports
+Loaded rule JumbledIncrementer
+Loaded rule AvoidDollarSigns
+Loaded rule ClassWithOnlyPrivateConstructorsShouldBeFinal
+Loaded rule ConsecutiveAppendsShouldReuse
+Loaded rule ReturnEmptyArrayRatherThanNull
+Loaded rule SignatureDeclareThrowsException
+Loaded rule AvoidReassigningParameters
+Loaded rule UnsynchronizedStaticDateFormatter
+Loaded rule IfStmtsMustUseBraces
+Loaded rule JUnitSpelling
+Loaded rule RemoteSessionInterfaceNamingConvention
+Loaded rule ForLoopsMustUseBraces
+Loaded rule AvoidThrowingNullPointerException
+Loaded rule ImportFromSamePackage
+Loaded rule MDBAndSessionBeanNamingConvention
+Loaded rule SuspiciousEqualsMethodName
+Loaded rule UncommentedEmptyConstructor
+Loaded rule MissingSerialVersionUID
+Loaded rule UseLocaleWithCaseConversions
+Loaded rule UseCollectionIsEmpty
+Loaded rule UselessOverridingMethod
+Loaded rule MissingStaticMethodInNonInstantiatableClass
+Loaded rule OverrideBothEqualsAndHashcode
+Loaded rule AvoidDuplicateLiterals
+Loaded rule EmptyStatementBlock
+Using Java version: Java 1.8
+Loaded rule NonStaticInitializer
+Loaded rule TestClassWithoutTestCases
+Loaded rule UseAssertNullInsteadOfAssertTrue
+Loaded rule OverrideBothEqualsAndHashcode
+Loaded rule EmptyFinalizer
+Loaded rule ExtendsObject
+Loaded rule JUnitAssertionsShouldIncludeMessage
+Loaded rule IfStmtsMustUseBraces
+Loaded rule AvoidCatchingThrowable
+Loaded rule DoNotCallSystemExit
+Loaded rule UseAssertSameInsteadOfAssertTrue
+Loaded rule ConsecutiveAppendsShouldReuse
+Loaded rule JumbledIncrementer
+Loaded rule EmptySwitchStatements
+Loaded rule WhileLoopsMustUseBraces
+Loaded rule PositionLiteralsFirstInComparisons
+Loaded rule EmptyStatementBlock
+Loaded rule AvoidUsingOctalValues
+Loaded rule GenericsNaming
+Loaded rule SimplifyConditional
+Loaded rule FinalFieldCouldBeStatic
+Loaded rule UseNotifyAllInsteadOfNotify
+Loaded rule AvoidThreadGroup
+Loaded rule AvoidStringBufferField
+Loaded rule EmptyMethodInAbstractClassShouldBeAbstract
+Loaded rule SingularField
+Loaded rule ForLoopsMustUseBraces
+Loaded rule AvoidProtectedMethodInFinalClassNotExtending
+Loaded rule IdempotentOperations
+Loaded rule InstantiationToGetClass
+Loaded rule ShortMethodName
+Loaded rule FinalizeOverloaded
+Loaded rule SuspiciousHashcodeMethodName
+Loaded rule EmptyTryBlock
+Loaded rule RemoteInterfaceNamingConvention
+Loaded rule UseStringBufferForStringAppends
+Loaded rule TooFewBranchesForASwitchStatement
+Loaded rule UseEqualsToCompareStrings
+Loaded rule UnusedPrivateField
+Loaded rule BadComparison
+Loaded rule MissingSerialVersionUID
+Loaded rule UselessOverridingMethod
+Loaded rule AvoidInstanceofChecksInCatchClause
+Loaded rule UseAssertTrueInsteadOfAssertEquals
+Loaded rule UseCollectionIsEmpty
+Loaded rule JUnitSpelling
+Loaded rule StaticEJBFieldShouldBeFinal
+Loaded rule EqualsNull
+Loaded rule StringInstantiation
+Loaded rule SuspiciousEqualsMethodName
+Loaded rule DoNotExtendJavaLangError
+Loaded rule BooleanInstantiation
+Loaded rule UnusedImports
+Loaded rule UnusedLocalVariable
+Loaded rule SystemPrintln
+Loaded rule AbstractClassWithoutAnyMethod
+Loaded rule EmptyStaticInitializer
+Loaded rule VariableNamingConventions
+Loaded rule ClassWithOnlyPrivateConstructorsShouldBeFinal
+Loaded rule TooManyStaticImports
+Loaded rule DoNotThrowExceptionInFinally
+Loaded rule AvoidLosingExceptionInformation
+Loaded rule ImmutableField
+Loaded rule EmptyFinallyBlock
+Loaded rule AvoidReassigningParameters
+Loaded rule SuspiciousConstantFieldName
+Loaded rule JUnitTestsShouldIncludeAssert
+Loaded rule UnnecessaryCaseChange
+Loaded rule SimplifyBooleanExpressions
+Loaded rule LocalHomeNamingConvention
+Loaded rule ConsecutiveLiteralAppends
+Loaded rule MissingStaticMethodInNonInstantiatableClass
+Loaded rule JUnitTestContainsTooManyAsserts
+Loaded rule AvoidUsingNativeCode
+Loaded rule NonCaseLabelInSwitchStatement
+Loaded rule ReturnFromFinallyBlock
+Loaded rule OneDeclarationPerLine
+Loaded rule CloneMethodMustImplementCloneable
+Loaded rule AvoidArrayLoops
+Loaded rule UselessOperationOnImmutable
+Loaded rule MisplacedNullCheck
+Loaded rule DefaultLabelNotLastInSwitchStmt
+Loaded rule RedundantFieldInitializer
+Loaded rule AvoidPrefixingMethodParameters
+Loaded rule SimpleDateFormatNeedsLocale
+Loaded rule AvoidDollarSigns
+Loaded rule CollapsibleIfStatements
+Loaded rule UnusedNullCheckInEquals
+Loaded rule ConstructorCallsOverridableMethod
+Loaded rule ImportFromSamePackage
+Loaded rule AvoidSynchronizedAtMethodLevel
+Loaded rule AvoidFieldNameMatchingMethodName
+Loaded rule CheckSkipResult
+Loaded rule CloneThrowsCloneNotSupportedException
+Loaded rule DontCallThreadRun
+Loaded rule AvoidCallingFinalize
+Loaded rule NonThreadSafeSingleton
+Loaded rule GuardLogStatement
+Loaded rule PackageCase
+Loaded rule SuspiciousOctalEscape
+Loaded rule AvoidMultipleUnaryOperators
+Loaded rule EmptyIfStmt
+Loaded rule UseCorrectExceptionLogging
+Loaded rule UnnecessaryFullyQualifiedName
+Loaded rule MethodReturnsInternalArray
+Loaded rule SwitchStmtsShouldHaveDefault
+Loaded rule DontImportJavaLang
+Loaded rule MethodWithSameNameAsEnclosingClass
+Loaded rule IfElseStmtsMustUseBraces
+Loaded rule UncommentedEmptyMethod
+Loaded rule FinalizeOnlyCallsSuperFinalize
+Loaded rule AvoidRethrowingException
+Loaded rule ClassCastExceptionWithToArray
+Loaded rule EmptyStatementNotInLoop
+Loaded rule AddEmptyString
+Loaded rule FinalizeDoesNotCallSuperFinalize
+Loaded rule BigIntegerInstantiation
+Loaded rule CheckResultSet
+Loaded rule AvoidAccessibilityAlteration
+Loaded rule UseLocaleWithCaseConversions
+Loaded rule LogicInversion
+Loaded rule ReturnEmptyArrayRatherThanNull
+Loaded rule AvoidThrowingRawExceptionTypes
+Loaded rule SignatureDeclareThrowsException
+Loaded rule EmptySynchronizedBlock
+Loaded rule UseAssertEqualsInsteadOfAssertTrue
+Loaded rule DoNotCallGarbageCollectionExplicitly
+Loaded rule UnsynchronizedStaticDateFormatter
+Loaded rule InefficientStringBuffering
+Loaded rule AvoidCatchingGenericException
+Loaded rule CloseResource
+Loaded rule AvoidDecimalLiteralsInBigDecimalConstructor
+Loaded rule UnconditionalIfStatement
+Loaded rule UnnecessaryBooleanAssertion
+Loaded rule UncommentedEmptyConstructor
+Loaded rule BrokenNullCheck
+Loaded rule PositionLiteralsFirstInCaseInsensitiveComparisons
+Loaded rule ForLoopShouldBeWhileLoop
+Loaded rule ProperLogger
+Loaded rule GuardDebugLogging
+Loaded rule UnnecessaryLocalBeforeReturn
+Loaded rule LooseCoupling
+Loaded rule AssignmentInOperand
+Loaded rule SimplifyBooleanReturns
+Loaded rule UseArraysAsList
+Loaded rule ClassNamingConventions
+Loaded rule AssignmentToNonFinalStatic
+Loaded rule ExceptionAsFlowControl
+Loaded rule LocalInterfaceSessionNamingConvention
+Loaded rule EmptyWhileStmt
+Loaded rule AvoidBranchingStatementAsLastInLoop
+Loaded rule DoubleCheckedLocking
+Loaded rule UseVarargs
+Loaded rule UnnecessaryConstructor
+Loaded rule ShortClassName
+Loaded rule DontImportSun
+Loaded rule FinalizeShouldBeProtected
+Loaded rule AvoidCatchingNPE
+Loaded rule RemoteSessionInterfaceNamingConvention
+Loaded rule DontUseFloatTypeForLoopIndices
+Loaded rule AbstractClassWithoutAbstractMethod
+Loaded rule DefaultPackage
+Loaded rule LoggerIsNotStaticFinal
+Loaded rule BooleanGetMethodName
+Loaded rule MDBAndSessionBeanNamingConvention
+Loaded rule SimplifyBooleanAssertion
+Loaded rule AvoidUsingHardCodedIP
+Loaded rule AvoidConstantsInterface
+Loaded rule NoPackage
+Loaded rule ArrayIsStoredDirectly
+Loaded rule DuplicateImports
+Loaded rule AvoidProtectedFieldInFinalClass
+Loaded rule EmptyCatchBlock
+Loaded rule AvoidDuplicateLiterals
+Loaded rule GuardLogStatementJavaUtil
+Loaded rule UnnecessaryWrapperObjectCreation
+Loaded rule AvoidPrintStackTrace
+Loaded rule UseArrayListInsteadOfVector
+Loaded rule AvoidThrowingNullPointerException
+Loaded rule MissingBreakInSwitch
+Loaded rule ProperCloneImplementation
+Loaded rule StringBufferInstantiationWithChar
+Loaded rule FieldDeclarationsShouldBeAtStartOfClass
+Loaded rule UnusedPrivateMethod
+Loaded rule MoreThanOneLogger
+Loaded rule AvoidFieldNameMatchingTypeName
+Loaded rule AvoidThrowingNewInstanceOfSameException
+Loaded rule OptimizableToArrayCall
+Loaded rule StringToString
+Loaded rule UnnecessaryConversionTemporary
+Loaded rule PreserveStackTrace
+Loaded rule MethodNamingConventions
+Loaded rule JUnitStaticSuite
+Processing C:\Users\Diego\eclipse-workspace\AnalyzeMe\src\main\Analiza.java
+Could not find class main.Analiza, due to: java.lang.ClassNotFoundException: main.Analiza
+Unable to use RuleChain for for XPath: 
+TypeDeclaration[count(../TypeDeclaration) = 1]/ClassOrInterfaceDeclaration
+[@Final = 'false']
+[count(./ClassOrInterfaceBody/ClassOrInterfaceBodyDeclaration/ConstructorDeclaration[@Private = 'true']) >= 1 ]
+[count(./ClassOrInterfaceBody/ClassOrInterfaceBodyDeclaration/ConstructorDeclaration[(@Public = 'true') or (@Protected = 'true') or (@PackagePrivate = 'true')]) = 0 ]
+[not(.//ClassOrInterfaceDeclaration)]
+             
+Unable to use RuleChain for for XPath: 
+.[count(ImportDeclaration[@Static = 'true']) > $maximumStaticImports]
+	             
+Unable to use RuleChain for for XPath: 
+        
+(//PrimaryPrefix[ends-with(Name/@Image, '.equals') and Name/@Image != 'Arrays.equals'] | //PrimarySuffix[@Image='equals' and not(../PrimaryPrefix/Literal)])
+ /following-sibling::PrimarySuffix/Arguments/ArgumentList/Expression
+ /PrimaryExpression[count(PrimarySuffix)=0]/PrimaryPrefix
+ /Name[@Image = ./../../../../../../../../../../Expression/ConditionalAndExpression
+ /EqualityExpression[@Image="!=" and count(./preceding-sibling::*)=0 and
+ ./PrimaryExpression/PrimaryPrefix/Literal/NullLiteral]
+  /PrimaryExpression/PrimaryPrefix/Name/@Image]
+        
+        
+Unable to use RuleChain for for XPath: 
+TypeDeclaration[count(../TypeDeclaration) = 1]/ClassOrInterfaceDeclaration
+[@Final = 'false']
+[count(./ClassOrInterfaceBody/ClassOrInterfaceBodyDeclaration/ConstructorDeclaration[@Private = 'true']) >= 1 ]
+[count(./ClassOrInterfaceBody/ClassOrInterfaceBodyDeclaration/ConstructorDeclaration[(@Public = 'true') or (@Protected = 'true') or (@PackagePrivate = 'true')]) = 0 ]
+[not(.//ClassOrInterfaceDeclaration)]
+             
+Unable to use RuleChain for for XPath: 
+.[count(ImportDeclaration[@Static = 'true']) > $maximumStaticImports]
+	             
+Unable to use RuleChain for for XPath: 
+        
+(//PrimaryPrefix[ends-with(Name/@Image, '.equals') and Name/@Image != 'Arrays.equals'] | //PrimarySuffix[@Image='equals' and not(../PrimaryPrefix/Literal)])
+ /following-sibling::PrimarySuffix/Arguments/ArgumentList/Expression
+ /PrimaryExpression[count(PrimarySuffix)=0]/PrimaryPrefix
+ /Name[@Image = ./../../../../../../../../../../Expression/ConditionalAndExpression
+ /EqualityExpression[@Image="!=" and count(./preceding-sibling::*)=0 and
+ ./PrimaryExpression/PrimaryPrefix/Literal/NullLiteral]
+  /PrimaryExpression/PrimaryPrefix/Name/@Image]
+        
+        
+Processing C:\Users\Diego\eclipse-workspace\AnalyzeMe\src\main\Basic.java
+Could not find class main.Basic, due to: java.lang.ClassNotFoundException: main.Basic
+[2018-12-05 19:11:22] End:DirectoryBasedAnalysisTask Result:OK

@@ -1,0 +1,11 @@
+[2018-12-05 19:11:22] Start:GraphMergeTask
+GraphMerge 8.2.0 (build 8717#45192 Win64) - (C) 2001-2016 FrontEndART Ltd.
+Loading: C:\Users\Diego\Downloads\SourceMeter-8.2.0-x64-windows\Java\Results\AnalyzeMe\java\2018-12-05-19-11-20\sourcemeter\graph\AnalyzeMe-AndroidHunter.graph
+Merging: C:\Users\Diego\Downloads\SourceMeter-8.2.0-x64-windows\Java\Results\AnalyzeMe\java\2018-12-05-19-11-20\sourcemeter\graph\AnalyzeMe-DCF.graph
+Merging: C:\Users\Diego\Downloads\SourceMeter-8.2.0-x64-windows\Java\Results\AnalyzeMe\java\2018-12-05-19-11-20\sourcemeter\graph\AnalyzeMe-FaultHunter.graph
+Merging: C:\Users\Diego\Downloads\SourceMeter-8.2.0-x64-windows\Java\Results\AnalyzeMe\java\2018-12-05-19-11-20\sourcemeter\graph\AnalyzeMe-PMD.graph
+Merging: C:\Users\Diego\Downloads\SourceMeter-8.2.0-x64-windows\Java\Results\AnalyzeMe\java\2018-12-05-19-11-20\sourcemeter\graph\AnalyzeMe-RTEHunter.graph
+Merging: C:\Users\Diego\Downloads\SourceMeter-8.2.0-x64-windows\Java\Results\AnalyzeMe\java\2018-12-05-19-11-20\sourcemeter\graph\AnalyzeMe-VulnerabilityHunter.graph
+Merging: C:\Users\Diego\Downloads\SourceMeter-8.2.0-x64-windows\Java\Results\AnalyzeMe\java\2018-12-05-19-11-20\sourcemeter\graph\AnalyzeMe-metrics.graph
+Saving: C:\Users\Diego\Downloads\SourceMeter-8.2.0-x64-windows\Java\Results\AnalyzeMe\java\2018-12-05-19-11-20\AnalyzeMe.graph
+[2018-12-05 19:11:22] End:GraphMergeTask Result:OK

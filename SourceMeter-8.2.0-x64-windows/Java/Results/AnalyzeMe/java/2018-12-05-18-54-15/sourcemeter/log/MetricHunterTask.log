@@ -1,0 +1,65 @@
+[2018-12-05 18:54:19] Start:MetricHunterTask
+MetricHunter 8.2.0 - Java (build 8717#45192 Win64) - (C) 2001-2016 FrontEndART Ltd.
+Warning: Metric 'WarningBlocker' is not calculated for the 'Class' entities!
+Warning: Rule for the following threshold configuration has not been built into the graph!
+m_id: WarningBlocker Relation:gt Value:0 Entities: Class
+Warning: Metric 'WarningBlocker' is not calculated for the 'Interface' entities!
+Warning: Rule for the following threshold configuration has not been built into the graph!
+m_id: WarningBlocker Relation:gt Value:0 Entities: Interface
+Warning: Metric 'WarningBlocker' is not calculated for the 'Enum' entities!
+Warning: Rule for the following threshold configuration has not been built into the graph!
+m_id: WarningBlocker Relation:gt Value:0 Entities: Enum
+Warning: Metric 'WarningBlocker' is not calculated for the 'Annotation' entities!
+Warning: Rule for the following threshold configuration has not been built into the graph!
+m_id: WarningBlocker Relation:gt Value:0 Entities: Annotation
+Warning: Metric 'WarningCritical' is not calculated for the 'Class' entities!
+Warning: Rule for the following threshold configuration has not been built into the graph!
+m_id: WarningCritical Relation:gt Value:0 Entities: Class
+Warning: Metric 'WarningCritical' is not calculated for the 'Interface' entities!
+Warning: Rule for the following threshold configuration has not been built into the graph!
+m_id: WarningCritical Relation:gt Value:0 Entities: Interface
+Warning: Metric 'WarningCritical' is not calculated for the 'Enum' entities!
+Warning: Rule for the following threshold configuration has not been built into the graph!
+m_id: WarningCritical Relation:gt Value:0 Entities: Enum
+Warning: Metric 'WarningCritical' is not calculated for the 'Annotation' entities!
+Warning: Rule for the following threshold configuration has not been built into the graph!
+m_id: WarningCritical Relation:gt Value:0 Entities: Annotation
+Warning: Metric 'WarningMajor' is not calculated for the 'Class' entities!
+Warning: Rule for the following threshold configuration has not been built into the graph!
+m_id: WarningMajor Relation:gt Value:0 Entities: Class
+Warning: Metric 'WarningMajor' is not calculated for the 'Interface' entities!
+Warning: Rule for the following threshold configuration has not been built into the graph!
+m_id: WarningMajor Relation:gt Value:0 Entities: Interface
+Warning: Metric 'WarningMajor' is not calculated for the 'Enum' entities!
+Warning: Rule for the following threshold configuration has not been built into the graph!
+m_id: WarningMajor Relation:gt Value:0 Entities: Enum
+Warning: Metric 'WarningMajor' is not calculated for the 'Annotation' entities!
+Warning: Rule for the following threshold configuration has not been built into the graph!
+m_id: WarningMajor Relation:gt Value:0 Entities: Annotation
+Warning: Metric 'WarningMinor' is not calculated for the 'Class' entities!
+Warning: Rule for the following threshold configuration has not been built into the graph!
+m_id: WarningMinor Relation:gt Value:0 Entities: Class
+Warning: Metric 'WarningMinor' is not calculated for the 'Interface' entities!
+Warning: Rule for the following threshold configuration has not been built into the graph!
+m_id: WarningMinor Relation:gt Value:0 Entities: Interface
+Warning: Metric 'WarningMinor' is not calculated for the 'Enum' entities!
+Warning: Rule for the following threshold configuration has not been built into the graph!
+m_id: WarningMinor Relation:gt Value:0 Entities: Enum
+Warning: Metric 'WarningMinor' is not calculated for the 'Annotation' entities!
+Warning: Rule for the following threshold configuration has not been built into the graph!
+m_id: WarningMinor Relation:gt Value:0 Entities: Annotation
+Warning: Metric 'WarningBlocker' is not calculated for the 'Method' entities!
+Warning: Rule for the following threshold configuration has not been built into the graph!
+m_id: WarningBlocker Relation:gt Value:0 Entities: Method
+Warning: Metric 'WarningCritical' is not calculated for the 'Method' entities!
+Warning: Rule for the following threshold configuration has not been built into the graph!
+m_id: WarningCritical Relation:gt Value:0 Entities: Method
+Warning: Metric 'WarningMajor' is not calculated for the 'Method' entities!
+Warning: Rule for the following threshold configuration has not been built into the graph!
+m_id: WarningMajor Relation:gt Value:0 Entities: Method
+Warning: Metric 'WarningMinor' is not calculated for the 'Method' entities!
+Warning: Rule for the following threshold configuration has not been built into the graph!
+m_id: WarningMinor Relation:gt Value:0 Entities: Method
+Succesfully added 5 warnings! 
+Graph saved successfully to C:\Users\Diego\Downloads\SourceMeter-8.2.0-x64-windows\Java\Results\AnalyzeMe\java\2018-12-05-18-54-15\AnalyzeMe.graph! 
+[2018-12-05 18:54:19] End:MetricHunterTask Result:OK

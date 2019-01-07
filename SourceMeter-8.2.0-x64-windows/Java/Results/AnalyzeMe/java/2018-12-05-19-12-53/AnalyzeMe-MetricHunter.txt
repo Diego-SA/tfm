@@ -1,0 +1,9 @@
+C:\Users\Diego\eclipse-workspace\AnalyzeMe\src\main\Analiza.java(3):AD_warning_Class: The metric AD (defined for Class 'Analiza') value '0' is less than the threshold value '1'.
+C:\Users\Diego\eclipse-workspace\AnalyzeMe\src\main\Analiza.java(3):CD_warning_Class: The metric CD (defined for Class 'Analiza') value '0' is less than the threshold value '0.25'.
+C:\Users\Diego\eclipse-workspace\AnalyzeMe\src\main\Analiza.java(3):NLPA_warning_Class: The metric NLPA (defined for Class 'Analiza') value '1' is greater than the threshold value '0'.
+C:\Users\Diego\eclipse-workspace\AnalyzeMe\src\main\Analiza.java(3):NPA_warning_Class: The metric NPA (defined for Class 'Analiza') value '1' is greater than the threshold value '0'.
+C:\Users\Diego\eclipse-workspace\AnalyzeMe\src\main\Analiza.java(3):TCD_warning_Class: The metric TCD (defined for Class 'Analiza') value '0' is less than the threshold value '0.25'.
+C:\Users\Diego\eclipse-workspace\AnalyzeMe\src\main\Analiza.java(3):TNLPA_warning_Class: The metric TNLPA (defined for Class 'Analiza') value '1' is greater than the threshold value '0'.
+C:\Users\Diego\eclipse-workspace\AnalyzeMe\src\main\Analiza.java(3):TNPA_warning_Class: The metric TNPA (defined for Class 'Analiza') value '1' is greater than the threshold value '0'.
+C:\Users\Diego\eclipse-workspace\AnalyzeMe\src\main\Analiza.java(7):CD_warning_Method: The metric CD (defined for Method 'void main(String[] args)') value '0' is less than the threshold value '0.25'.
+C:\Users\Diego\eclipse-workspace\AnalyzeMe\src\main\Analiza.java(7):TCD_warning_Method: The metric TCD (defined for Method 'void main(String[] args)') value '0' is less than the threshold value '0.25'.

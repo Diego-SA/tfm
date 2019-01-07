@@ -1,0 +1,14 @@
+[2018-12-05 18:54:19] Start:JAN2limTask
+JAN2Lim 8.2.0 (build 8717#45192 Win64) - (C) 2001-2016 FrontEndART Ltd.
+The component structure  hasn't built.
+Loading file:    C:\Users\Diego\eclipse-workspace\AnalyzeMe\.columbus_java\AnalyzeMe.ljsi
+
+Statistics:
+	Converting time              :       0.04s
+	Saving asg time              :       0.00s
+	Dumping limml time           :       0.00s
+	Total time                   :       0.04s
+	Peak memory usage            :       6.60MB
+	Number of not existed files  :          0
+
+[2018-12-05 18:54:19] End:JAN2limTask Result:OK

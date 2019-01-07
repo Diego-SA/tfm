@@ -1,0 +1,6 @@
+[2018-12-05 19:23:37] Start:GraphDumpTask
+GraphDumpTool 8.2.0 (build 8717#45192 Win64) - (C) 2001-2016 FrontEndART Ltd.
+Loading: C:\Users\Diego\Downloads\SourceMeter-8.2.0-x64-windows\Java\Results\AnalyzeMe\java\2018-12-05-19-23-35\AnalyzeMe.graph
+Creating csv dump ...
+Creating xml dump ...
+[2018-12-05 19:23:37] End:GraphDumpTask Result:OK

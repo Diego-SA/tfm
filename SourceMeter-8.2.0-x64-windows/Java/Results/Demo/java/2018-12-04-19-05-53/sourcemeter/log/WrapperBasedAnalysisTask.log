@@ -1,0 +1,7 @@
+[2018-12-04 19:05:53] Start:WrapperBasedAnalysisTask
+GenericConfig 8.2.0 (build 8717#45192 Win64) - (C) 2001-2016 FrontEndART Ltd.
+WrapperEnvironmentConfig 8.2.0 (build 8717#45192 Win64) - (C) 2001-2016 FrontEndART Ltd.
+POM file apache-log4j-2.3-src/pom.xml specified the -f/--file command-line argument does not exist 
+EXCEPTION:src\Task.cpp:1647:ERROR: Execution failure! Exit:1
+
+[2018-12-04 19:05:55] End:WrapperBasedAnalysisTask Result:critical error 
