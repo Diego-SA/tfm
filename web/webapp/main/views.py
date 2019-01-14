@@ -17,6 +17,7 @@ def index(request):
 		if form.is_valid():
 			project_url = form.cleaned_data['project_url']
 			commit_sha = form.cleaned_data['commit_sha']
+			
 			# Temporary: random number to create cloned project
 			random_n = random.randint(1,10000000)
 			html = '<p>URL: ' + project_url + '. Commit: ' + commit_sha + '</p>'
@@ -30,6 +31,7 @@ def index(request):
 	
 	
 from git import Repo
+import subprocess
 import os
 import shutil
 import stat
@@ -38,8 +40,14 @@ import re
 def generateRepoAtts(project_url, commit_sha, random_n):
 	project_name = project_url.split('/')[-1]
 
-	# SourceMeter directory
-	sourceMeter_link = '..\\..\\SourceMeter-8.2.0-x64-windows\\Java\\SourceMeterJava.exe'
+	windows = os.environ['WINDOWS']
+	print('Valor de windows: ' + windows)
+	
+	# SourceMeter directory (for local developement)
+	if (windows):
+		sourceMeter_link = 'static/SourceMeter-8.2.0-x64-windows/Java/SourceMeterJava.exe'
+	else:
+		sourceMeter_link = 'static/SourceMeter-8.2.0-x64-linux/Java/SourceMeterJava'
 	
 	# Directory where we will save project clone and metrics analysis
 	dir_clone = project_name + '_repo' + str(random_n)
@@ -69,12 +77,21 @@ def generateRepoAtts(project_url, commit_sha, random_n):
 				filter_txt.write('+' + file.replace('/', '\\\\') + '\n')
 		filter_txt.close()
 		
+		#Add execution permission to SourceMeter
+		st = os.stat(sourceMeter_link)
+		os.chmod(sourceMeter_link, st.st_mode | stat.S_IEXEC)
+		
+		print(os.environ['JAVA_HOME'])
+		print(os.environ['PATH'])
 		#Get SourceMeter metrics of the touched files
 		args = sourceMeter_link + " -projectName="+project_name+" -projectBaseDir="+dir_clone+" -resultsDir="+results+" -externalHardFilter=filter.txt" 
-		exe = os.system(args)
+		args = args.split()
+		exe = subprocess.run(args)
 		
 		if (exe != 0):
 			print('Something went wrong in SourceMeter execution')
+		else:
+			print('No problems executing SourceMeter')
 	
 import pandas as pd
 import os
@@ -97,7 +114,7 @@ def predictBuggyFiles(project_url):
 	class_df = class_df.set_index("ID")
 
 	prediction_df = class_df.drop(['Name', 'LongName', 'Parent', 'Component', 'Path', 'Runtime Rules'], axis = 1)
-	classifier_dir = 'RandomForestv1.sav'
+	classifier_dir = 'static\\RandomForestv1.sav'
 	# Load classifier and predict
 	clf = pickle.load(open(classifier_dir, 'rb'))
 

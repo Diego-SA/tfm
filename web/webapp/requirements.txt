@@ -1,0 +1,6 @@
+django
+django-heroku
+requests
+gunicorn
+gitpython
+pandas
