@@ -1,4 +1,0 @@
-# Filter all the files
--[^\.]*.java
-# Include only the main
-+Analiza.java

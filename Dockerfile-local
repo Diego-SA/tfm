@@ -1,0 +1,13 @@
+FROM  paberlo/alpine-scikit-django-jdk8:v1
+
+# variables para dockerizacion
+ENV HOME=/home
+ENV PROYECTO=tfm_diego
+
+#copiar codigo
+COPY webapp/ $HOME/$PROYECTO
+
+# cambiar punto de entrada al directorio del proyecto
+WORKDIR $HOME/$PROYECTO
+#start service opening port given by heroku in $PORT
+CMD python3 manage.py runserver 0.0.0.0:8000

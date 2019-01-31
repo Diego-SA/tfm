@@ -5,6 +5,15 @@ from django.views.decorators.http import require_http_methods
 from .forms import BuildForm
 
 import random
+from git import Repo
+import subprocess
+import os
+import shutil
+import stat
+import re
+from django.conf import settings
+windows = False
+
 
 # Create your views here.
 def index(request):
@@ -25,37 +34,34 @@ def index(request):
 			generateRepoAtts(project_url, commit_sha, random_n)
 			html = html + predictBuggyFiles(project_url)
 			
+			# Limpiar archivos no necesarios
+			cleanFiles(project_url.split('/')[-1] + '_' + commit_sha)
+			
 			return HttpResponse(html)
     
 	return render(request, 'build_template.html', {'form':form})
-	
-	
-from git import Repo
-import subprocess
-import os
-import shutil
-import stat
-import re
+
 
 def generateRepoAtts(project_url, commit_sha, random_n):
+	print(os.listdir())
 	project_name = project_url.split('/')[-1]
 
-	windows = os.environ['WINDOWS']
-	print('Valor de windows: ' + windows)
-	
-	# SourceMeter directory (for local developement)
-	if (windows):
+	# SourceMeter directory (could be Windows for local developement)
+
+
+	if os.name == 'nt':# Windows
 		sourceMeter_link = 'static/SourceMeter-8.2.0-x64-windows/Java/SourceMeterJava.exe'
 	else:
-		sourceMeter_link = 'static/SourceMeter-8.2.0-x64-linux/Java/SourceMeterJava'
-	
+		sourceMeter_link = 'static/sourcemeter-8.2.0-x64-linux/Java/SourceMeterJava'
+
+	#sourceMeter_link = 'E:/Dropbox/DOCENCIA/TFM/Diego Fermin/webappablo/tfm-code/webapp/static/SourceMeter-8.2.0-x64-linux/Java/SourceMeterJava'
 	# Directory where we will save project clone and metrics analysis
-	dir_clone = project_name + '_repo' + str(random_n)
+	dir_clone = project_name + '_' + commit_sha
 	results = 'Results'
 
 	# Download project
 	repo = Repo.clone_from(project_url, dir_clone)
-
+	
 	# Get commit object
 	commit = None
 	for c in repo.iter_commits():
@@ -74,24 +80,29 @@ def generateRepoAtts(project_url, commit_sha, random_n):
 		for file in commit.stats.files.keys():
 			if len(file) > 5 and file[-5:] == '.java' and file not in files and '{' not in file:
 				files.append(file)
-				filter_txt.write('+' + file.replace('/', '\\\\') + '\n')
+				if os.name == 'nt': #windows
+					filter_txt.write('+' + file.replace('/', '\\\\') + '\n')
+				else:
+					filter_txt.write('+' + file + '\n')
 		filter_txt.close()
 		
 		#Add execution permission to SourceMeter
 		st = os.stat(sourceMeter_link)
 		os.chmod(sourceMeter_link, st.st_mode | stat.S_IEXEC)
 		
-		print(os.environ['JAVA_HOME'])
-		print(os.environ['PATH'])
 		#Get SourceMeter metrics of the touched files
-		args = sourceMeter_link + " -projectName="+project_name+" -projectBaseDir="+dir_clone+" -resultsDir="+results+" -externalHardFilter=filter.txt" 
+		args = sourceMeter_link + " -projectName="+project_name+\
+			   " -projectBaseDir="+dir_clone+" -resultsDir="+results+\
+			   " -externalHardFilter=filter.txt -JVMOptions=-Xmx128m -maximumThreads=8"
+		#args = sourceMeter_link + " -projectName=" + project_name + " -projectBaseDir=" + dir_clone + " -resultsDir=" + results + " -FBFileList=fbfilelist.txt -runFB=true"
 		args = args.split()
-		exe = subprocess.run(args)
 		
-		if (exe != 0):
+		exe = subprocess.run(args)
+
+		if (exe.returncode != 0):
 			print('Something went wrong in SourceMeter execution')
 		else:
-			print('No problems executing SourceMeter')
+			print('Ejecución correcta')
 	
 import pandas as pd
 import os
@@ -114,7 +125,10 @@ def predictBuggyFiles(project_url):
 	class_df = class_df.set_index("ID")
 
 	prediction_df = class_df.drop(['Name', 'LongName', 'Parent', 'Component', 'Path', 'Runtime Rules'], axis = 1)
-	classifier_dir = 'static\\RandomForestv1.sav'
+	if os.name == 'nt': #windows
+		classifier_dir = 'models\\RandomForestv1.sav'
+	else:
+		classifier_dir = 'models/RandomForestv1.sav'
 	# Load classifier and predict
 	clf = pickle.load(open(classifier_dir, 'rb'))
 
@@ -128,16 +142,11 @@ def predictBuggyFiles(project_url):
 			html = html + "<p>Class " + class_df.loc[idx, 'Name'] + " probably hasn't bugs</p>"		
 	
 	return html
-
-# Borrar los archivos de una carpeta
-# De momento lanza un error de tipo PermissionError. Acceso denegado
-def deleteFiles(path):
-    os.chmod(path, stat.S_IWRITE)
-    
-    for file_ in os.listdir(path):
-        filePath=os.path.join(path, file_)
-        if os.path.isdir(filePath):
-            deleteFiles(filePath)
-        else:
-            os.chmod(filePath, stat.S_IWRITE)
-            os.remove(filePath)
+	
+def cleanFiles(dir_project):
+    # Eliminar repositorio
+	shutil.rmtree(dir_project, ignore_errors = True)
+	# Borrar resultados
+	shutil.rmtree('Results', ignore_errors = True)
+	# Eliminar archivo filter.txt
+	os.remove('filter.txt')

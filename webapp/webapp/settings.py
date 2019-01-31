@@ -25,7 +25,7 @@ SECRET_KEY = 'a^!^#()1bqy34zsq7dui4oxr$y(9eo@%(%&4i(&^itjgmb08$y'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['afternoon-sea-12017.herokuapp.com', 'localhost']
+ALLOWED_HOSTS = ['tfm-diego.herokuapp.com', 'localhost', '127.0.0.1', '0.0.0.0']
 
 
 # Application definition
@@ -117,7 +117,8 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
+
 # ENVIROMENT VARIABLES
-JAVA_HOME = os.environ.get('JAVA_HOME')
-PATH = os.environ['PATH'] + ':' + os.environ.get('PATH')
-WINDOWS = os.environ.get('WINDOWS')
+#JAVA_HOME = os.environ.get('JAVA_HOME')
+JAVA_HOME = "static/jdk1.8.0_131/bin/"
+PATH = os.environ['PATH'] + ':' + os.environ.get('PATH') 

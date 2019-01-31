@@ -1,5 +1,0 @@
-C:\Users\Diego\eclipse-workspace\AnalyzeMe\src\main\Analiza.java(3):AD_warning_Class: The metric AD (defined for Class 'Analiza') value '0' is less than the threshold value '1'.
-C:\Users\Diego\eclipse-workspace\AnalyzeMe\src\main\Analiza.java(3):CD_warning_Class: The metric CD (defined for Class 'Analiza') value '0' is less than the threshold value '0.25'.
-C:\Users\Diego\eclipse-workspace\AnalyzeMe\src\main\Analiza.java(3):TCD_warning_Class: The metric TCD (defined for Class 'Analiza') value '0' is less than the threshold value '0.25'.
-C:\Users\Diego\eclipse-workspace\AnalyzeMe\src\main\Analiza.java(5):CD_warning_Method: The metric CD (defined for Method 'void main(String[] args)') value '0' is less than the threshold value '0.25'.
-C:\Users\Diego\eclipse-workspace\AnalyzeMe\src\main\Analiza.java(5):TCD_warning_Method: The metric TCD (defined for Method 'void main(String[] args)') value '0' is less than the threshold value '0.25'.

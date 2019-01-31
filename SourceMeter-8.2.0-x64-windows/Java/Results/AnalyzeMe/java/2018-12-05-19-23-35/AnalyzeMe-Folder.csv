@@ -1,8 +1,0 @@
-"ID","Name","LongName","Parent"
-"L105","C:","C:","L101"
-"L106","Users","C:/Users","L105"
-"L107","Diego","C:/Users/Diego","L106"
-"L108","eclipse-workspace","C:/Users/Diego/eclipse-workspace","L107"
-"L109","AnalyzeMe","C:/Users/Diego/eclipse-workspace/AnalyzeMe","L108"
-"L110","src","C:/Users/Diego/eclipse-workspace/AnalyzeMe/src","L109"
-"L111","main","C:/Users/Diego/eclipse-workspace/AnalyzeMe/src/main","L110"

@@ -1,2 +1,0 @@
-C:\Users\Diego\eclipse-workspace\AnalyzeMe\src\main\Analiza.java(7): PMD_UV: Consider using varargs for methods or constructors which take an array the last parameter.
-C:\Users\Diego\eclipse-workspace\AnalyzeMe\src\main\Analiza.java(12): PMD_SP: System.out.println is used

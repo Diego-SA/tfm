@@ -1,6 +1,0 @@
-[2018-12-05 19:23:37] Start:PMD2GraphTask
-PMD2Graph 8.2.0 (build 8717#45192 Win64) - (C) 2001-2016 FrontEndART Ltd.
-Loading LIM ASG file "C:\Users\Diego\Downloads\SourceMeter-8.2.0-x64-windows\Java\Results\AnalyzeMe\java\2018-12-05-19-23-35\sourcemeter\asg\AnalyzeMe.lim"
-Loading filter file "C:\Users\Diego\Downloads\SourceMeter-8.2.0-x64-windows\Java\Results\AnalyzeMe\java\2018-12-05-19-23-35\sourcemeter\asg\AnalyzeMe.flim"
-Loading xml file "C:\Users\Diego\Downloads\SourceMeter-8.2.0-x64-windows\Java\Results\AnalyzeMe\java\2018-12-05-19-23-35\sourcemeter\temp\AnalyzeMe-PMD.xml"
-[2018-12-05 19:23:37] End:PMD2GraphTask Result:OK
