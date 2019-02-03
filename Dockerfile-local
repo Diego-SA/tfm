@@ -9,5 +9,10 @@ COPY webapp/ $HOME/$PROYECTO
 
 # cambiar punto de entrada al directorio del proyecto
 WORKDIR $HOME/$PROYECTO
+
+#Instalar rq
+RUN pip3 install rq
+
 #start service opening port given by heroku in $PORT
 CMD python3 manage.py runserver 0.0.0.0:8000
+
