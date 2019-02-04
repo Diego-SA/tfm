@@ -14,6 +14,13 @@ import re
 from django.conf import settings
 windows = False
 
+# noinspection PyUnresolvedReferences
+from worker import conn
+from rq import Queue
+
+
+q = Queue(connection=conn)
+
 
 # Create your views here.
 def index(request):
@@ -26,23 +33,42 @@ def index(request):
 		if form.is_valid():
 			project_url = form.cleaned_data['project_url']
 			commit_sha = form.cleaned_data['commit_sha']
-			
-			# Temporary: random number to create cloned project
-			random_n = random.randint(1,10000000)
+
 			html = '<p>URL: ' + project_url + '. Commit: ' + commit_sha + '</p>'
-			# Analyze project and predict bugs
-			generateRepoAtts(project_url, commit_sha, random_n)
-			html = html + predictBuggyFiles(project_url)
+
+			project_name = project_url.split('/')[-1]
+			results_dir = 'Results/' + project_name + '/java'
+			print('Direccion a probar si existe: ',results_dir)
+			# Check if commit has already been processed
+			if (os.path.exists(results_dir)):
+				print('Analisis ya realizado, prediciendo bugs')
+				html = html + predictBuggyFiles(project_url,commit_sha)
+				return HttpResponse(html)
 			
-			# Limpiar archivos no necesarios
-			cleanFiles(project_url.split('/')[-1] + '_' + commit_sha)
+			# Check if commit has already been requested but not processed
+			dir_temp = project_name + '_' + commit_sha + '.temp'
+			print('Archivo a probar si existe: ',dir_temp)
+			if (os.path.exists(dir_temp)):
+				print('Archivo existe, indicando mensaje de espera')
+				temp_file = open(dir_temp, 'r')
+				data = temp_file.read()
+				temp_file.close()
+				return HttpResponse(data)
 			
+			# If there's no result and temporal file, process it
+			error = generateRepoAtts(project_url, commit_sha)
+
+			# Repo or commit not found
+			if (error == -1):
+				html = html + '<p>The repository or the commit cannot be found.</p>'
+			else:
+				html = html + '<p>Your request is being processed by our worker. Please wait and repeat request in a while.</p>'
 			return HttpResponse(html)
     
 	return render(request, 'build_template.html', {'form':form})
 
 
-def generateRepoAtts(project_url, commit_sha, random_n):
+def generateRepoAtts(project_url, commit_sha):
 	print(os.listdir())
 	project_name = project_url.split('/')[-1]
 
@@ -60,7 +86,12 @@ def generateRepoAtts(project_url, commit_sha, random_n):
 	results = 'Results'
 
 	# Download project
-	repo = Repo.clone_from(project_url, dir_clone)
+	repo = None
+	try:
+		repo = Repo.clone_from(project_url, dir_clone)
+	except:
+		print('Repository not found')
+		return -1
 	
 	# Get commit object
 	commit = None
@@ -70,6 +101,7 @@ def generateRepoAtts(project_url, commit_sha, random_n):
 			break
 	if (commit is None):
 		print("Commit not found")
+		return -1
 	else:
 		# Deny all files, then will only allow touched files
 		filter_txt = open("filter.txt", "w")
@@ -97,18 +129,20 @@ def generateRepoAtts(project_url, commit_sha, random_n):
 		#args = sourceMeter_link + " -projectName=" + project_name + " -projectBaseDir=" + dir_clone + " -resultsDir=" + results + " -FBFileList=fbfilelist.txt -runFB=true"
 		args = args.split()
 		
-		exe = subprocess.run(args)
+		# Process data background
+		result = q.enqueue(processBackground, args)
 
-		if (exe.returncode != 0):
-			print('Something went wrong in SourceMeter execution')
-		else:
-			print('Ejecución correcta')
+		# Temp file indicating request is processing
+		temporal_file = open(dir_clone+'.temp','w')
+		temporal_file.write('<p>Processing data. Please repeat the request later.</p>')
+		temporal_file.close()
+
 	
 import pandas as pd
 import os
 import pickle
 
-def predictBuggyFiles(project_url):
+def predictBuggyFiles(project_url, commit_sha):
 
 	project_name = project_url.split('/')[-1]
 	data_dir = 'Results/' + project_name + '/java'
@@ -141,9 +175,10 @@ def predictBuggyFiles(project_url):
 		else:
 			html = html + "<p>Class " + class_df.loc[idx, 'Name'] + " probably hasn't bugs</p>"		
 	
-	return html
+	# Clean non-necessary files
+	cleanFiles(project_url.split('/')[-1] + '_' + commit_sha)
 
-import errno, os, stat, shutil
+	return html
 
 def cleanFiles(dir_project):
 	# Eliminar repositorio con os.system. GitPython deja
@@ -158,6 +193,11 @@ def cleanFiles(dir_project):
 	
 
 
+def processBackground(args):
+	print('Procesando en segundo plano')
+	exe = subprocess.run(args)
 
-
-
+	if (exe.returncode != 0):
+		print('Something went wrong in SourceMeter execution')
+	else:
+		print('Ejecución correcta')
