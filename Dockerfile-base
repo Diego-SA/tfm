@@ -4,7 +4,6 @@ FROM frolvlad/alpine-python-machinelearning
 ENV HOME=/home
 ENV PROYECTO=tfm_diego
 
-
 #dependencias java y glibc
 RUN apk --update add openjdk8-jre && \
 	apk --no-cache add ca-certificates wget && \
@@ -13,7 +12,7 @@ RUN apk --update add openjdk8-jre && \
 	apk add glibc-2.28-r0.apk && \
 	apk add git
 COPY static/x86_64-linux-gnu /usr/lib/x86_64-linux-gnu/ 
-COPY static/sourcemeter-8.2.0-x64-linux $HOME/$PROYECTO/static/sourcemeter-8.2.0-x64-linux/
+COPY static/sourcemeter-8.2.0-x64-linux $HOME/$PROYECTO/webapp/static/sourcemeter-8.2.0-x64-linux/
 
 ENV GCONV_PATH=/usr/lib/x86_64-linux-gnu/gconv
 ENV JAVA_HOME=/usr/lib/jvm/java-1.8-openjdk/jre/bin

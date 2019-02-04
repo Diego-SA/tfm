@@ -50,9 +50,9 @@ def generateRepoAtts(project_url, commit_sha, random_n):
 
 
 	if os.name == 'nt':# Windows
-		sourceMeter_link = 'static/SourceMeter-8.2.0-x64-windows/Java/SourceMeterJava.exe'
+		sourceMeter_link = '../static/SourceMeter-8.2.0-x64-windows/Java/SourceMeterJava.exe'
 	else:
-		sourceMeter_link = 'static/sourcemeter-8.2.0-x64-linux/Java/SourceMeterJava'
+		sourceMeter_link = '../static/sourcemeter-8.2.0-x64-linux/Java/SourceMeterJava'
 
 	#sourceMeter_link = 'E:/Dropbox/DOCENCIA/TFM/Diego Fermin/webappablo/tfm-code/webapp/static/SourceMeter-8.2.0-x64-linux/Java/SourceMeterJava'
 	# Directory where we will save project clone and metrics analysis
@@ -85,7 +85,7 @@ def generateRepoAtts(project_url, commit_sha, random_n):
 				else:
 					filter_txt.write('+' + file + '\n')
 		filter_txt.close()
-		
+
 		#Add execution permission to SourceMeter
 		st = os.stat(sourceMeter_link)
 		os.chmod(sourceMeter_link, st.st_mode | stat.S_IEXEC)
@@ -142,11 +142,22 @@ def predictBuggyFiles(project_url):
 			html = html + "<p>Class " + class_df.loc[idx, 'Name'] + " probably hasn't bugs</p>"		
 	
 	return html
-	
+
+import errno, os, stat, shutil
+
 def cleanFiles(dir_project):
-    # Eliminar repositorio
-	shutil.rmtree(dir_project, ignore_errors = True)
+	# Eliminar repositorio con os.system. GitPython deja
+	#una cache que no permite borrarla con shutil.rmtree.
+	#shutil.rmtree(dir_project, ignore_errors = True)
+	os.system('rmdir /S /Q "{}"'.format(dir_project))
+
 	# Borrar resultados
 	shutil.rmtree('Results', ignore_errors = True)
 	# Eliminar archivo filter.txt
 	os.remove('filter.txt')
+	
+
+
+
+
+
