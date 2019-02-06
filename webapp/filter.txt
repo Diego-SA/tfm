@@ -1,2 +1,0 @@
--[^\.]*.java
-+hexagonal\\src\\main\\java\\com\\iluwatar\\hexagonal\\domain\\LotteryNumbers.java

@@ -1,0 +1,1 @@
+docker build -f Dockerfile.worker --no-cache -t tfm-diego-worker .

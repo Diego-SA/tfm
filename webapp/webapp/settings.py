@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 
 import os
 
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -28,6 +29,7 @@ DEBUG = True
 ALLOWED_HOSTS = ['tfm-diego.herokuapp.com', 'localhost', '127.0.0.1', '0.0.0.0']
 
 
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -37,7 +39,17 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
 	'main'
+    #'django_rq'
 ]
+
+#RQ_QUEUES = {
+#    'default': {
+#        'HOST': 'localhost',
+#        'PORT': 6379,
+#        'DB': 0,
+#        'DEFAULT_TIMEOUT': 360,
+#    }
+#}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

@@ -1,1 +1,1 @@
-docker build -f Dockerfile-local -t tfm-diego-local .
+docker build -f Dockerfile-local --no-cache -t tfm-diego-local:latest .

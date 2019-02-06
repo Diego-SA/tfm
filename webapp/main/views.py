@@ -10,17 +10,15 @@ import subprocess
 import os
 import shutil
 import stat
-import re
+import re, time
 from django.conf import settings
 windows = False
 
-# noinspection PyUnresolvedReferences
-from worker import conn
 from rq import Queue
+import redis
 
-
-q = Queue(connection=conn)
-
+#url del servicio del contenedor de redis
+q = Queue(connection=redis.from_url('redis://redis:6379/'))
 
 # Create your views here.
 def index(request):
@@ -38,33 +36,13 @@ def index(request):
 
 			project_name = project_url.split('/')[-1]
 			results_dir = 'Results/' + project_name + '/java'
-			print('Direccion a probar si existe: ',results_dir)
-			# Check if commit has already been processed
-			if (os.path.exists(results_dir)):
-				print('Analisis ya realizado, prediciendo bugs')
-				html = html + predictBuggyFiles(project_url,commit_sha)
-				return HttpResponse(html)
-			
-			# Check if commit has already been requested but not processed
-			dir_temp = project_name + '_' + commit_sha + '.temp'
-			print('Archivo a probar si existe: ',dir_temp)
-			if (os.path.exists(dir_temp)):
-				print('Archivo existe, indicando mensaje de espera')
-				temp_file = open(dir_temp, 'r')
-				data = temp_file.read()
-				temp_file.close()
-				return HttpResponse(data)
-			
-			# If there's no result and temporal file, process it
-			error = generateRepoAtts(project_url, commit_sha)
 
-			# Repo or commit not found
-			if (error == -1):
-				html = html + '<p>The repository or the commit cannot be found.</p>'
-			else:
-				html = html + '<p>Your request is being processed by our worker. Please wait and repeat request in a while.</p>'
+			generateRepoAtts(project_url, commit_sha)
+			html = predictBuggyFiles(project_url, commit_sha)
 			return HttpResponse(html)
-    
+
+
+
 	return render(request, 'build_template.html', {'form':form})
 
 
@@ -73,8 +51,6 @@ def generateRepoAtts(project_url, commit_sha):
 	project_name = project_url.split('/')[-1]
 
 	# SourceMeter directory (could be Windows for local developement)
-
-
 	if os.name == 'nt':# Windows
 		sourceMeter_link = '../static/SourceMeter-8.2.0-x64-windows/Java/SourceMeterJava.exe'
 	else:
@@ -90,9 +66,9 @@ def generateRepoAtts(project_url, commit_sha):
 	try:
 		repo = Repo.clone_from(project_url, dir_clone)
 	except:
-		print('Repository not found')
+		print('wrong repository url or it was previously downloaded and not removed yet')
 		return -1
-	
+
 	# Get commit object
 	commit = None
 	for c in repo.iter_commits():
@@ -130,12 +106,12 @@ def generateRepoAtts(project_url, commit_sha):
 		args = args.split()
 		
 		# Process data background
-		result = q.enqueue(processBackground, args)
+		job = q.enqueue(processBackground, args)
+		while not job.status == 'finished':
+			print("esperando procesado en cola ...",q.name)
+			time.sleep(5)
 
-		# Temp file indicating request is processing
-		temporal_file = open(dir_clone+'.temp','w')
-		temporal_file.write('<p>Processing data. Please repeat the request later.</p>')
-		temporal_file.close()
+
 
 	
 import pandas as pd
@@ -181,16 +157,15 @@ def predictBuggyFiles(project_url, commit_sha):
 	return html
 
 def cleanFiles(dir_project):
-	# Eliminar repositorio con os.system. GitPython deja
-	#una cache que no permite borrarla con shutil.rmtree.
-	#shutil.rmtree(dir_project, ignore_errors = True)
-	os.system('rmdir /S /Q "{}"'.format(dir_project))
+	# Eliminar repositorio con os.system. GitPython no deja
+	# una cache que no permite borrarla con shutil.rmtree en windows.
+	if windows: os.system('rmdir /S /Q "{}"'.format(dir_project))
+	else: shutil.rmtree(dir_project, ignore_errors=True)
 
 	# Borrar resultados
 	shutil.rmtree('Results', ignore_errors = True)
 	# Eliminar archivo filter.txt
 	os.remove('filter.txt')
-	
 
 
 def processBackground(args):
