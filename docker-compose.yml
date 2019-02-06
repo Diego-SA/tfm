@@ -8,10 +8,9 @@ services:
     environment:
       - REDIS_HOST=redis
       - PYTHONUNBUFFERED=0 #para ver los prints en los logs
+      - LOCAL=true
     ports:
       - "8000:8000"
-    volumes:
-      - results-data:/home/tfm_diego/
   worker:
     image: tfm-diego-worker
     command: python3 -u worker.py
@@ -19,14 +18,6 @@ services:
       - redis
     environment:
       - PYTHONUNBUFFERED=0
-    volumes:
-      - results-data:/home/tfm_diego/
+      - LOCAL=true
   redis:
     image: redis:3.2-alpine
-    volumes:
-      - redis_data:/data
-
-volumes:
-  redis_data:
-  results-data:
-
