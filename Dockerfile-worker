@@ -1,4 +1,4 @@
-FROM  paberlo/alpine-scikit-django-jdk8:v1
+FROM  paberlo/alpine-scikit-django-jdk8
 
 # variables para dockerizacion
 ENV HOME=/home

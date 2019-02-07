@@ -1,1 +1,1 @@
-docker build -f Dockerfile-base -t paberlo/alpine-scikit-django-jdk8:v1 .
+docker build -f Dockerfile-base -t paberlo/alpine-scikit-django-jdk8 .
