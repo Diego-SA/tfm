@@ -1,7 +1,7 @@
 version: '3.6'
 services:
   web:
-    image: tfm-diego-local:latest
+    image: tfm-diego-web:latest
     command: python3 -u manage.py runserver 0.0.0.0:8000 #-u para ver los prints en los logs
     depends_on:
       - redis
