@@ -2,14 +2,13 @@ import os
 
 import redis
 from rq import Worker, Queue, Connection
-from urllib.parse import urlparse
 
 print("iniciando en GLOBAL el  worker")
 if os.name == 'nt':  # Windows
     worker_conn = redis.from_url(os.getenv('REDISTOGO_URL', 'redis://localhost:6379/'))
 elif os.getenv('LOCAL') == 'true':  # linux (local docker compose)
     worker_conn = redis.from_url('redis://redis:6379/')
-else: # heroku
+else:  # heroku
     worker_conn = redis.from_url(os.environ.get("REDIS_URL"))
 
 
