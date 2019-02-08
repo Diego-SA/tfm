@@ -41,12 +41,11 @@ def index(request):
 			commit_sha = form.cleaned_data['commit_sha']
 
 			job1 = q.enqueue(generate_repo_atts, project_url, commit_sha)
-			time.sleep(2)
+			time.sleep(1)  # dar tiempo para que job1 acabe rápidamente si ve que ya están los datos
 			# no se pueden usar watchdogs porque esto es front end, y el worker se baja las carpetas
 			# en su espacio no compartido (heroku no deja compartir volúmenes entre contenedores)
 			if not job1.status == 'finished':
 				return HttpResponse("Descargando datos.<p> Por favor vuelve más tarde e introduce los mismos valores.")
-
 			job2 = q.enqueue(predict_buggy_files, project_url, commit_sha)
 			while not job2.status == 'finished':  # es rápido
 				time.sleep(2)
