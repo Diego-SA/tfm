@@ -1,0 +1,23 @@
+version: '3.6'
+services:
+  web:
+    image: tfm-diego-web:latest
+    command: python3 -u manage.py runserver 0.0.0.0:8000 #-u para ver los prints en los logs
+    depends_on:
+      - redis
+    environment:
+      - REDIS_HOST=redis
+      - PYTHONUNBUFFERED=0 #para ver los prints en los logs
+      - LOCAL=true
+    ports:
+      - "8000:8000"
+  worker:
+    image: tfm-diego-worker
+    command: python3 -u worker.py
+    depends_on:
+      - redis
+    environment:
+      - PYTHONUNBUFFERED=0
+      - LOCAL=true
+  redis:
+    image: redis:3.2-alpine

@@ -1,0 +1,14 @@
+FROM  paberlo/alpine-scikit-django-jdk8
+
+# variables para dockerizacion
+ENV HOME=/home
+ENV PROYECTO=tfm_diego
+
+#copiar codigo
+COPY webapp/ $HOME/$PROYECTO
+
+# cambiar punto de entrada al directorio del proyecto
+WORKDIR $HOME/$PROYECTO
+
+
+CMD python3 worker.py

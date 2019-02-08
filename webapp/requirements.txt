@@ -5,3 +5,5 @@ gunicorn
 gitpython
 pandas
 sklearn
+rq
+worker
