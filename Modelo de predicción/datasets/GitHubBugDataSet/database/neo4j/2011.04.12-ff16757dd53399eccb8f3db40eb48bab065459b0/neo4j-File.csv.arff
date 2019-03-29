@@ -1,0 +1,13 @@
+@RELATION bughunter
+
+@ATTRIBUTE "unique_id" STRING
+@ATTRIBUTE "McCC" NUMERIC
+@ATTRIBUTE "CLOC" NUMERIC
+@ATTRIBUTE "LLOC" NUMERIC
+@ATTRIBUTE "Number of previous modifications" NUMERIC
+@ATTRIBUTE "Number of previous fixes" NUMERIC
+@ATTRIBUTE "Number of committers" NUMERIC
+@ATTRIBUTE "Number of developer commits" NUMERIC
+@ATTRIBUTE "Bug class" {true,false}
+
+@DATA
