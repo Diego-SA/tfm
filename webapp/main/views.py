@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from django.shortcuts import redirect
 
 from .forms import BuildForm
 from git import Repo
@@ -16,7 +17,7 @@ import logging
 
 windows = False
 
-if os.name == 'nt':  # Windows
+if os.name == 'nt':  # Windows local
 	windows = True
 	worker_conn = redis.from_url(os.getenv('REDISTOGO_URL', 'redis://localhost:6379/'))
 elif os.getenv('LOCAL') == 'true':  # linux (local docker compose)
@@ -35,6 +36,7 @@ def index(request):
 		return render(request, 'build_template.html', {'form': form})
 	# POST method -> If there's data, process it and call function
 	elif request.method == 'POST':
+
 		form = BuildForm(request.POST)
 		if form.is_valid():
 			project_url = form.cleaned_data['project_url']
@@ -51,6 +53,8 @@ def index(request):
 				time.sleep(2)
 			return HttpResponse(job2.result)
 
+def results(request):
+    return HttpResponse("Viendo resultados")
 
 # noinspection PyPep8,PyPep8
 def generate_repo_atts(project_url, commit_sha):
@@ -58,6 +62,7 @@ def generate_repo_atts(project_url, commit_sha):
 	# si no existe, se realiza.
 	project_name = project_url.split('/')[-1]
 	results_dir = 'Results/' + project_name + '/java'
+
 	if not os.path.exists(results_dir):
 
 		if windows:
@@ -117,6 +122,7 @@ def generate_repo_atts(project_url, commit_sha):
 				print('Something went wrong in SourceMeter execution')
 			else:
 				print('Ejecución correcta')
+
 
 
 def predict_buggy_files(project_url, commit_sha):
