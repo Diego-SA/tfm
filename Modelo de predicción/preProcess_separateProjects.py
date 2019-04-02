@@ -54,4 +54,3 @@ for project in projects:
     files = files.drop(["ID", "Name", "LongName", "Parent"], axis=1)
     # Write whole processed project into 1 file
     classes.to_csv(data_output + project+'_classes.csv', index=False)
-    files.to_csv(data_output + project+'_files.csv', index=False)
