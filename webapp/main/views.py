@@ -144,14 +144,61 @@ def predict_buggy_files(project_url, commit_sha):
 	clf = pickle.load(open(classifier_dir, 'rb'))
 
 	prediction = clf.predict(prediction_df)
-
 	html = ""
+	print("Escribiendo datos")
+    # Analisis descriptivo
+    # Seleccionar variables mas correlacionadas
+	class_df_descriptive = class_df[["Name", "CBO", "NLE", "RFC", "NOI", "NL", "Complexity Metric Rules", "WMC", "TNLM", "Documentation Metric Rules", "NLM"]]
+	headers_complete = ["CBO", "NLE", "RFC", "NOI", "NL", "Complexity Metric Rules", "WMC", "TNLM", "Documentation Metric Rules", "NLM"]
+	headers = ["CBO", "NLE", "RFC", "NOI", "NL", "CMR", "WMC", "TNLM", "DMR", "NLM"]
+	# Dibujar cabecera
+	html = html + "<table><tr><th>Class</th>"
+	for header in headers:
+		html = html + "<th>" + header + "</th>"
+	html = html + "</tr>"
+	# Dibujar filas
+	for index, row in class_df_descriptive.iterrows():
+		html = html + "<tr>"
+		html = html + "<th>" + str(row["Name"]) + "</th>"
+		for header in headers_complete:
+			html = html + "<th>" + str(row[header]) + "</th>"
+		html = html + "</tr>"
+	html = html + "</table>"
+	
+	# Leyenda de los atributos
+	html = html + '<br>'
+	html = html + '<p>Leyenda: '
+	html = html + """<ul type = "square">
+         <li><b>CBO</b>: <i>Coupling Between Object classes</i>, número de usos de otras clases. Un valor muy alto de este valor indica que es muy dependiente de otros módulos, y po rtanto más difícil de testear y utilizar, además de muy sensible a cambios. Si tiene un valor alto quizás debería revisar sus cambios.</li>
+         <li><b>NLE</b>: <i>Nesting Level Else-If</i>, grado de anidamiento máximo de cada clase (bloques de tipo if-else-if cuentan como 1 nivel)</li>
+         <li><b>RFC</b>: <i>Response set For Class</i>: combinación de número de métodos locales y métodos llamados de otras clases.</li>
+         <li><b>NOI</b>: <i>Number of Outgoing Invocations</i>, número de métodos e inicialización de atributos llamados de otras clases.</li>
+		 <li><b>NL</b>: <i>Nesting level</i>, indica el grado de anidamiento máximo.</li>
+		 <li><b>CMR</b>: <i>Complexity Metric Rules</i>, violaciones en las buenas prácticas relativas a métricas de complejidad. Si es distinto de 0, quizás deba revisar sus cambios.</li>
+		 <li><b>WMC</b>: <i>Weigthed Methods per Class</i>, número de caminos independientes de una clase. Se calcula como la suma de la complejidad coclomática de los métodos locales y bloques de inicialización.</li>
+		 <li><b>TNLM</b>: <i>Total Number of Local Methods</i>, número total de métodos locales de cada clase, incluyendo métodos de clases anidadas, anónimas y locales.</li>
+		 <li><b>DMR</b>: <i>Documentation Metric Rules</i>, violaciones de buenas prácticas relativas a la cantidad de comentarios y documentación.</li>
+		 <li><b>NLM</b>: <i>Number of Local Methods</i>, número de métodos locales de cada clase.</li>
+      </ul>"""
+	
+	# FASE BETA: Mostrar predicciones
+	html = html + '<br>'
+	html = html + """<button onclick="showPredictions()">Ver predicción de bugs (BETA)</button>
+	<script>
+	function showPredictions() {
+	  document.getElementById("prediction").style.display = "inline";
+	}
+	</script>"""
+	
+    # Prediccion de bugs
+	html = html + "<div id='prediction' style='display:none'>"
 	for idx, predict in zip(prediction_df.index, prediction):
 		if predict:
 			html = html + "<p>Class " + class_df.loc[idx, 'Name'] + " probably has bugs</p>"
 		else:
 			html = html + "<p>Class " + class_df.loc[idx, 'Name'] + " probably hasn't bugs</p>"
-
+	html = html + "</div>"
+	
 	# Clean non-necessary files
 	clean_files(project_url.split('/')[-1] + '_' + commit_sha)
 
