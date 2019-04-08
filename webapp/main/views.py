@@ -148,9 +148,9 @@ def predict_buggy_files(project_url, commit_sha):
 	print("Escribiendo datos")
     # Analisis descriptivo
     # Seleccionar variables mas correlacionadas
-	class_df_descriptive = class_df[["Name", "CBO", "NLE", "RFC", "NOI", "NL", "Complexity Metric Rules", "WMC", "TNLM", "Documentation Metric Rules", "NLM"]]
-	headers_complete = ["CBO", "NLE", "RFC", "NOI", "NL", "Complexity Metric Rules", "WMC", "TNLM", "Documentation Metric Rules", "NLM"]
-	headers = ["CBO", "NLE", "RFC", "NOI", "NL", "CMR", "WMC", "TNLM", "DMR", "NLM"]
+	class_df_descriptive = class_df[["Name", "CBO", "NLE", "RFC", "Complexity Metric Rules", "WMC", "Documentation Metric Rules", "Coupling Metric Rules", "TNLA", "WarningInfo", "Size Metric Rules"]]
+	headers_complete = ["CBO", "NLE", "RFC", "Complexity Metric Rules", "WMC", "Documentation Metric Rules", "Coupling Metric Rules", "TNLA", "WarningInfo", "Size Metric Rules"]
+	headers = ["CBO", "NLE", "RFC", "CXMR", "WMC", "DMR", "CPMR", "TNLA", "WI", "SMR"]
 	# Dibujar cabecera
 	html = html + "<table><tr><th>Class</th>"
 	for header in headers:
@@ -172,13 +172,13 @@ def predict_buggy_files(project_url, commit_sha):
          <li><b>CBO</b>: <i>Coupling Between Object classes</i>, número de usos de otras clases. Un valor muy alto de este valor indica que es muy dependiente de otros módulos, y po rtanto más difícil de testear y utilizar, además de muy sensible a cambios. Si tiene un valor alto quizás debería revisar sus cambios.</li>
          <li><b>NLE</b>: <i>Nesting Level Else-If</i>, grado de anidamiento máximo de cada clase (bloques de tipo if-else-if cuentan como 1 nivel)</li>
          <li><b>RFC</b>: <i>Response set For Class</i>: combinación de número de métodos locales y métodos llamados de otras clases.</li>
-         <li><b>NOI</b>: <i>Number of Outgoing Invocations</i>, número de métodos e inicialización de atributos llamados de otras clases.</li>
-		 <li><b>NL</b>: <i>Nesting level</i>, indica el grado de anidamiento máximo.</li>
-		 <li><b>CMR</b>: <i>Complexity Metric Rules</i>, violaciones en las buenas prácticas relativas a métricas de complejidad. Si es distinto de 0, quizás deba revisar sus cambios.</li>
+         <li><b>CXMR</b>: <i>Complexity Metric Rules</i>, violaciones en las buenas prácticas relativas a métricas de complejidad. Si es distinto de 0, quizás deba revisar sus cambios.</li>
 		 <li><b>WMC</b>: <i>Weigthed Methods per Class</i>, número de caminos independientes de una clase. Se calcula como la suma de la complejidad coclomática de los métodos locales y bloques de inicialización.</li>
-		 <li><b>TNLM</b>: <i>Total Number of Local Methods</i>, número total de métodos locales de cada clase, incluyendo métodos de clases anidadas, anónimas y locales.</li>
 		 <li><b>DMR</b>: <i>Documentation Metric Rules</i>, violaciones de buenas prácticas relativas a la cantidad de comentarios y documentación.</li>
-		 <li><b>NLM</b>: <i>Number of Local Methods</i>, número de métodos locales de cada clase.</li>
+		 <li><b>CPMR</b>: <i>Coupling Metric Rules</i>, violaciones en las buenas prácticas relativas al acoplamiento de las clases. Si es distinto de 0, quizás deba revisar sus cambios.</li>
+		 <li><b>TNLA</b>: <i>Total Number of Local Attributes</i>, número de atributos locales de cada clase.</li>
+		 <li><b>WI</b>: <i>Warning Info</i>, advertencias de tipo <i>WarningInfo</i> en cada clase</li>
+		 <li><b>SMR</b>: <i>Size Metric Rules</i>, violaciones en las buenas prácticas relativas al tamaño de las clases. Si es distinto de 0, quizás deba revisar sus cambios.</li>
       </ul>"""
 	
 	# FASE BETA: Mostrar predicciones
