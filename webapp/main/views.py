@@ -45,7 +45,58 @@ def index(request):
 			# no se pueden usar watchdogs porque esto es front end, y el worker se baja las carpetas
 			# en su espacio no compartido (heroku no deja compartir volúmenes entre contenedores)
 			if not job1.status == 'finished':
-				return HttpResponse("Descargando datos.<p> Por favor vuelve más tarde e introduce los mismos valores.")
+				html = """
+					<html><head><style>	
+						@import url(https://fonts.googleapis.com/css?family=Roboto:400,300,600,400italic);
+						* {
+						  margin: 0;
+						  box-sizing: border-box;
+						  -webkit-box-sizing: border-box;
+						  -moz-box-sizing: border-box;
+						  -webkit-font-smoothing: antialiased;
+						  -moz-font-smoothing: antialiased;
+						  -o-font-smoothing: antialiased;
+						  font-smoothing: antialiased;
+						  text-rendering: optimizeLegibility;
+						}
+						body {
+						  font-family: "Roboto", Helvetica, Arial, sans-serif;
+						  font-weight: 100;
+						  font-size: 16px;
+						  line-height: 30px;
+						  color: #777;
+						  background: #4CAF50;
+						}
+						
+						#container {
+						  width: 400px;
+						  margin: 0 auto;
+						  position: relative;
+						}
+						
+						#contact {
+						  background: #F9F9F9;
+						  padding: 25px;
+						  margin: 150px 0;
+						  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+						}
+						</style>
+						<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+						</head>
+						<body>
+						<div id="container">
+							<div id="contact">
+								<h3> Descargando datos </h3>
+								<h4> Por favor vuelve más tarde e introduce los mismos valores. </h4>
+								<div style="font-size: 100px; display: grid; padding-top: 30px">
+								<i style="margin-left: auto; margin-right: auto;" class="fas fa-sync fa-spin"></i>
+								</div>
+							</div>
+						</div>
+						</body>
+						</html>
+				"""
+				return HttpResponse(html)
 			job2 = q.enqueue(predict_buggy_files, project_url, commit_sha)
 			while not job2.status == 'finished':  # es rápido
 				time.sleep(2)
@@ -144,7 +195,140 @@ def predict_buggy_files(project_url, commit_sha):
 	clf = pickle.load(open(classifier_dir, 'rb'))
 
 	prediction = clf.predict(prediction_df)
-	html = ""
+	html = """<html><head><style>	
+	@import url(https://fonts.googleapis.com/css?family=Roboto:400,300,600,400italic);
+	* {
+	  margin: 0;
+	  box-sizing: border-box;
+	  -webkit-box-sizing: border-box;
+	  -moz-box-sizing: border-box;
+	  -webkit-font-smoothing: antialiased;
+	  -moz-font-smoothing: antialiased;
+	  -o-font-smoothing: antialiased;
+	  font-smoothing: antialiased;
+	  text-rendering: optimizeLegibility;
+	}
+	body {
+	  font-family: "Roboto", Helvetica, Arial, sans-serif;
+	  font-weight: 100;
+	  font-size: 16px;
+	  line-height: 30px;
+	  color: #777;
+	  background: #4CAF50;
+	}
+	
+	.container {
+	  max-width: 1000px;
+	  width: 100%;
+	  margin: 0 auto;
+	  position: relative;
+	}
+	
+	#contact {
+	  background: #F9F9F9;
+	  padding: 25px;
+	  margin: 150px 0;
+	  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+	}
+		#contact button[type="submit"] {
+	  cursor: pointer;
+	  width: 100%;
+	  border: none;
+	  background: #4CAF50;
+	  color: #FFF;
+	  margin: 0 0 5px;
+	  padding: 10px;
+	  font-size: 15px;
+	}
+
+	#contact button[type="submit"]:hover {
+	  background: #43A047;
+	  -webkit-transition: background 0.3s ease-in-out;
+	  -moz-transition: background 0.3s ease-in-out;
+	  transition: background-color 0.3s ease-in-out;
+	}
+
+	#contact button[type="submit"]:active {
+	  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.5);
+	}
+	
+	#contact button[type="submit"] {
+	  font: 400 12px/16px "Roboto", Helvetica, Arial, sans-serif;
+	}
+	
+	.container-table100 {
+	  width: 950px;
+	  margin-left: auto;
+	  margin-right: auto;
+
+	}
+	
+	.wrap-table100 {
+	  border-radius: 10px;
+	  overflow: hidden;
+	}
+
+	.table {
+	  width: 100%;
+	  display: table;
+	  margin: 0;
+	}
+
+	tr {
+	  background: #fff;
+	  margin-left: auto;
+	  margin-right: auto;
+	}
+
+	.row.header {
+	  color: #ffffff;
+	  background: #4CAF50;
+	}
+	.row .cell:before {
+		font-size: 12px;
+		color: #808080;
+		line-height: 1.2;
+		text-transform: uppercase;
+		font-weight: unset !important;
+		margin-bottom: 13px;
+	}
+	.table, .row {
+	  width: 100% !important;
+	}
+
+	.row:hover {
+	  background-color: #ececff;
+	}
+	
+	.row {
+		border-bottom: 1px solid #f2f2f2;
+		margin: 0;
+	}
+
+	.row .cell {
+		border: none;
+		padding-right: 10px;
+		padding-left: 10px;
+		padding-top: 15px;
+		padding-bottom: 15px;
+	}
+
+
+	li {
+		margin-left: 15 px;
+	}
+	
+	p {
+		margin-left: auto;
+		margin-right: auto;
+		
+	}
+	</style></head>
+	<body>
+	<div id="container">
+	<div id="contact" style="width: 1000px; margin-left: auto; margin-right: auto ;">
+	"""
+	
 	print("Escribiendo datos")
     # Analisis descriptivo
     # Seleccionar variables mas correlacionadas
@@ -152,24 +336,24 @@ def predict_buggy_files(project_url, commit_sha):
 	headers_complete = ["CBO", "NLE", "RFC", "Complexity Metric Rules", "WMC", "Documentation Metric Rules", "Coupling Metric Rules", "TNLA", "WarningInfo", "Size Metric Rules"]
 	headers = ["CBO", "NLE", "RFC", "CXMR", "WMC", "DMR", "CPMR", "TNLA", "WI", "SMR"]
 	# Dibujar cabecera
-	html = html + "<table><tr><th>Class</th>"
+	html = html + "<div class='container-table100'><table class='wrap-table100' style= 'margin-left: auto; margin-right: auto'><tr class='row header'><th class='cell'>Class</th>"
 	for header in headers:
-		html = html + "<th>" + header + "</th>"
+		html = html + "<th class='cell'>" + header + "</th>"
 	html = html + "</tr>"
 	# Dibujar filas
 	for index, row in class_df_descriptive.iterrows():
-		html = html + "<tr>"
-		html = html + "<th>" + str(row["Name"]) + "</th>"
+		html = html + "<tr class='row'>"
+		html = html + "<th class='cell'>" + str(row["Name"]) + "</th>"
 		for header in headers_complete:
-			html = html + "<th>" + str(row[header]) + "</th>"
+			html = html + "<th class='cell'>" + str(row[header]) + "</th>"
 		html = html + "</tr>"
-	html = html + "</table>"
+	html = html + "</table></div>"
 	
 	# Leyenda de los atributos
 	html = html + '<br>'
-	html = html + '<p>Leyenda: '
+	html = html + '<p style="font-size: 25px; padding-bottom: 5px">Información sobre las métricas: </p>'
 	html = html + """<ul type = "square">
-         <li><b>CBO</b>: <i>Coupling Between Object classes</i>, número de usos de otras clases. Un valor muy alto de este valor indica que es muy dependiente de otros módulos, y po rtanto más difícil de testear y utilizar, además de muy sensible a cambios. Si tiene un valor alto quizás debería revisar sus cambios.</li>
+         <li><b>CBO</b>: <i>Coupling Between Object classes</i>, número de usos de otras clases. Un valor muy alto de este valor indica que es muy dependiente de otros módulos, y por tanto más difícil de testear y utilizar, además de muy sensible a cambios. Si tiene un valor alto quizás debería revisar sus cambios.</li>
          <li><b>NLE</b>: <i>Nesting Level Else-If</i>, grado de anidamiento máximo de cada clase (bloques de tipo if-else-if cuentan como 1 nivel)</li>
          <li><b>RFC</b>: <i>Response set For Class</i>: combinación de número de métodos locales y métodos llamados de otras clases.</li>
          <li><b>CXMR</b>: <i>Complexity Metric Rules</i>, violaciones en las buenas prácticas relativas a métricas de complejidad. Si es distinto de 0, quizás deba revisar sus cambios.</li>
@@ -183,10 +367,10 @@ def predict_buggy_files(project_url, commit_sha):
 	
 	# FASE BETA: Mostrar predicciones
 	html = html + '<br>'
-	html = html + """<button onclick="showPredictions()">Ver predicción de bugs (BETA)</button>
+	html = html + """<button type="submit" onclick="showPredictions()">Ver predicción de bugs (BETA)</button>
 	<script>
 	function showPredictions() {
-	  document.getElementById("prediction").style.display = "inline";
+	  document.getElementById("prediction").style.display = "grid";
 	}
 	</script>"""
 	
@@ -198,7 +382,9 @@ def predict_buggy_files(project_url, commit_sha):
 		else:
 			html = html + "<p>Class " + class_df.loc[idx, 'Name'] + " probably hasn't bugs</p>"
 	html = html + "</div>"
-	
+		
+		
+	html = html + "</div></div></body></html>"
 	# Clean non-necessary files
 	clean_files(project_url.split('/')[-1] + '_' + commit_sha)
 
