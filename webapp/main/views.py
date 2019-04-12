@@ -88,7 +88,7 @@ def index(request):
 							<div id="contact">
 								<h3> Descargando datos </h3>
 								<h4> Por favor vuelve más tarde e introduce los mismos valores. </h4>
-								<div style="font-size: 100px; display: grid; padding-top: 30px">
+								<div style="font-size: 100px; display: grid; padding-top: 30px; padding-bottom: 20px">
 								<i style="margin-left: auto; margin-right: auto;" class="fas fa-sync fa-spin"></i>
 								</div>
 							</div>
