@@ -3,6 +3,7 @@ from django.http import HttpResponse
 
 from .forms import BuildForm
 from git import Repo
+import git
 from rq import Queue
 import subprocess
 import shutil
@@ -13,6 +14,7 @@ import pandas as pd
 import os
 import pickle
 import logging
+import zipfile
 
 windows = False
 
@@ -29,22 +31,44 @@ q = Queue(connection=worker_conn)
 
 # Create your views here.
 def index(request):
+	print("Llamada del tipo", request.method)
 	# GET method -> Write form
 	if request.method == 'GET':
 		form = BuildForm()
 		return render(request, 'build_template.html', {'form': form})
 	# POST method -> If there's data, process it and call function
 	elif request.method == 'POST':
-		form = BuildForm(request.POST)
+		form = BuildForm(request.POST, request.FILES)
 		if form.is_valid():
 			project_url = form.cleaned_data['project_url']
 			commit_sha = form.cleaned_data['commit_sha']
-
-			job1 = q.enqueue(generate_repo_atts, project_url, commit_sha)
+			file = request.FILES['file']
+				
+			# Intentar extraer el proyecto y leer los commits
+			# print(file)
+			archive = zipfile.ZipFile(file.temporary_file_path(), 'r')
+			print("Archivo zipfile", archive)
+			archive.extractall()
+			archive.close()
+			
+			print("Archivos en directorio actual")
+			for f in os.listdir():
+				print(f)
+			print("Archivos en directorio MEDIA")
+			for f in os.listdir('./media'):
+				print(f)
+			
+			
+			prueba = generate_repo_atts(project_url, commit_sha, file.name)
+			
+			
+			
+			# job1 = q.enqueue(generate_repo_atts, project_url, commit_sha, file.name)
 			time.sleep(1)  # dar tiempo para que job1 acabe rápidamente si ve que ya están los datos
 			# no se pueden usar watchdogs porque esto es front end, y el worker se baja las carpetas
 			# en su espacio no compartido (heroku no deja compartir volúmenes entre contenedores)
-			if not job1.status == 'finished':
+			#if not job1.status == 'finished':
+			if prueba == 0:
 				html = """
 					<html><head><style>	
 						@import url(https://fonts.googleapis.com/css?family=Roboto:400,300,600,400italic);
@@ -97,15 +121,15 @@ def index(request):
 						</html>
 				"""
 				return HttpResponse(html)
-			job2 = q.enqueue(predict_buggy_files, project_url, commit_sha)
-			while not job2.status == 'finished':  # es rápido
-				time.sleep(2)
-			return HttpResponse(job2.result)
+			# job2 = q.enqueue(predict_buggy_files, project_url, commit_sha)
+			html = predict_buggy_files(project_url, commit_sha)
+			#while not job2.status == 'finished':  # es rápido
+			#	time.sleep(2)
+			return HttpResponse(html)
 
 
 # noinspection PyPep8,PyPep8
-def generate_repo_atts(project_url, commit_sha):
-
+def generate_repo_atts(project_url, commit_sha, file):
 	# si no existe, se realiza.
 	project_name = project_url.split('/')[-1]
 	results_dir = 'Results/' + project_name + '/java'
@@ -120,30 +144,61 @@ def generate_repo_atts(project_url, commit_sha):
 		dir_clone = project_name + '_' + commit_sha
 		results = 'Results'
 
+		print("Archivos en directorio actual")
+		for f in os.listdir():
+			print(f)
+		print("Archivos en directorio MEDIA")
+		for f in os.listdir('./media'):
+			print(f)
+		
+		
+		# Ir al proyecto (se presupone que si el archivo se llama algo.zip al extraer habra una carpeta algo)
+		print("Variable file: ",file[:-4])
+		git_object = git.Git(file[:-4])
+		# Log con respecto a rama master (apareceran cambios locales)
+		loginfo = git_object.log('origin/master..HEAD')
+		commits = []
+		for p in loginfo.splitlines():
+			if (p[:6] == 'commit'):
+				commits = commits + [p[7:]]
+		print("Commits elegidos", commits)
+		
+		# Objeto Repo para poder coger los commits
+		repo = git.Repo(file[:-4])
+		print("Repo: ", repo)
+		
 		# Download project
-
-		try:
-			repo = Repo.clone_from(project_url, dir_clone)
-		except Exception as e:
-			logging.exception(e)
-			logging.error('wrong repository url or it was previously downloaded and not removed yet')
-			return -1
+		# try:
+			# repo = Repo.clone_from(project_url, dir_clone)
+		# except Exception as e:
+			# logging.exception(e)
+			# logging.error('wrong repository url or it was previously downloaded and not removed yet')
+			# return -1
 
 		# Get commit object
-		commit = None
-		for c in repo.iter_commits():
-			if c.hexsha == commit_sha:
-				commit = c
-				break
-		if commit is None:
-			print("Commit not found")
-			return -1
-		else:
-			# Deny all files, then will only allow touched files
-			filter_txt = open("filter.txt", "w")
-			filter_txt.write("-[^\.]*.java\n")
+		# commit = None
+		# for c in repo.iter_commits():
+			# if c.hexsha == commit_sha:
+				# commit = c
+				# break
+		# if commit is None:
+			# print("Commit not found")
+			# return -1
+		# else:
+		
+		
+		# Deny all files, then will only allow touched files
+		filter_txt = open("filter.txt", "w")
+		filter_txt.write("-[^\.]*.java\n")
 
-			files = []
+		files = []
+		
+		
+		for c in commits:
+			print("Commit cogido ", c)
+			
+			commit = repo.commit(c)
+			
 			# Select .java touched files and put in filter.txt
 			for file in commit.stats.files.keys():
 				if len(file) > 5 and file[-5:] == '.java' and file not in files and '{' not in file:
@@ -152,22 +207,24 @@ def generate_repo_atts(project_url, commit_sha):
 						filter_txt.write('+' + file.replace('/', '\\\\') + '\n')
 					else:
 						filter_txt.write('+' + file + '\n')
-			filter_txt.close()
+		filter_txt.close()
 
-			# Add execution permission to SourceMeter
-			st = os.stat(source_meter_link)
-			os.chmod(source_meter_link, st.st_mode | stat.S_IEXEC)
+		# Add execution permission to SourceMeter
+		st = os.stat(source_meter_link)
+		os.chmod(source_meter_link, st.st_mode | stat.S_IEXEC)
 
-			# Get SourceMeter metrics of the touched files
-			args = source_meter_link + " -projectName=" + project_name + " -projectBaseDir=" + dir_clone +\
-				" -resultsDir=" + results + " -externalHardFilter=filter.txt -JVMOptions=-Xmx128m -maximumThreads=8"
+		# Get SourceMeter metrics of the touched files
+		args = source_meter_link + " -projectName=" + project_name + " -projectBaseDir=" + '.' +\
+			" -resultsDir=" + results + " -externalHardFilter=filter.txt -JVMOptions=-Xmx128m -maximumThreads=8"
 
-			args = args.split()
-			exe = subprocess.run(args)
-			if exe.returncode != 0:
-				print('Something went wrong in SourceMeter execution')
-			else:
-				print('Ejecución correcta')
+		args = args.split()
+		exe = subprocess.run(args)
+		if exe.returncode != 0:
+			print('Something went wrong in SourceMeter execution')
+			return 0
+		else:
+			print('Ejecución correcta')
+			return 1
 
 
 def predict_buggy_files(project_url, commit_sha):
@@ -386,7 +443,7 @@ def predict_buggy_files(project_url, commit_sha):
 		
 	html = html + "</div></div></body></html>"
 	# Clean non-necessary files
-	clean_files(project_url.split('/')[-1] + '_' + commit_sha)
+	# clean_files(project_url.split('/')[-1] + '_' + commit_sha)
 
 	return html
 

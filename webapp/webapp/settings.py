@@ -134,3 +134,7 @@ USE_TZ = True
 #JAVA_HOME = os.environ.get('JAVA_HOME')
 JAVA_HOME = "static/jdk1.8.0_131/bin/"
 PATH = os.environ['PATH'] + ':' + os.environ.get('PATH') 
+
+# Ruta para alojar archivos
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
