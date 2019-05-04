@@ -1,14 +1,16 @@
 language: python
 python:
-    - "3.6"
+- '3.6'
 script:
-    - python tests.py
-    
+- python tests.py
 after_success:
-    - docker tag tfm-diego-heroku-web:latest registry.heroku.com/tfm-diego/web
-    - docker push registry.heroku.com/tfm-diego/web
-
-    - docker tag tfm-diego-worker:latest registry.heroku.com/tfm-diego/worker
-    - docker push registry.heroku.com/tfm-diego/worker
-
-    - heroku container:release web worker -a tfm-diego
+- docker tag tfm-diego-heroku-web:latest registry.heroku.com/tfm-diego/web
+- docker push registry.heroku.com/tfm-diego/web
+- docker tag tfm-diego-worker:latest registry.heroku.com/tfm-diego/worker
+- docker push registry.heroku.com/tfm-diego/worker
+- heroku container:release web worker -a tfm-diego
+deploy:
+  provider: heroku
+  api_key:
+    secure: EmmxEiBf2EpBDHe0FCy7bZmAUTfxqbuTYCxZsvFCtn3ibnsInUbQcqzA9hdvcY3xfKd3Ih3G1w4IhwWFn3338qdnGQb3+hPEQT316e4YFw/wug8uMboMzO/025W6FQkT64t0/2GMfGq1Q/MjzilDa0T/DDtPODgfAzskkh39j4fRUVzf70RgKZVEmMGgQgbO0r49WCzWd1UHB//55aCHP7OpWZo4mW91uVOA+3zB6YA9w0mO5CQbhQ045CIyYRTjW0+kYcd6wsyiIHcxFto2HPuEQaCL0wb0zDtclt9TlWdGEs4COWdW4tNiswhUENZJ46hDqPZZORjG0THCf5kSZPBr9yaPJXemNEDyWL0s/f4sfTNpY6dEzL9jM66hpseWkfhGNNhvyWiNowXSsh9V3xx1JORVh/pOdIm5aNWXrPJ9MWIGk6qYpcx15LoViPV2Z9UYnqn21OWvkFz4SutwZZ/jQt6TA7QiqPVPk0QTYaZbm9MpSTq4pAPBiLYlHfehz2mDwBjyWEB1GcM8f+uDd+8mceHcLZ5O0tyO639hcqMXXxftsWVnv4W5GCF7+ywNqtTR8+ReiI3P7ZDAlj/+F36gXYbIKisVkbInnZdnQhfqXNEpxq2fFKEiSVVhEYCki1UvrXqGAg/aW0+mCY0YwOFZJXlUFplXUgl/gzYGjUU=
+  app: tfm-diego
