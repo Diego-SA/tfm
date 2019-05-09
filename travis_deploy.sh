@@ -1,10 +1,11 @@
 #!/usr/bin/env bash
-
+echo "login a docker"
 echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin
-echo "$HEROKU_API_KEY" | docker login -u "$HEROKU_USERNAME" --password-stdin registry.heroku.com
 export REPO=tfm-diego-heroku
 docker pull paberlo/alpine-scikit-django-jdk8:latest
 
+echo "login a heroku"
+echo "$HEROKU_API_KEY" | docker login -u "$HEROKU_USERNAME" --password-stdin registry.heroku.com
 export TAG=web
 docker build -f $TRAVIS_BUILD_DIR/Dockerfile-heroku-web -t $REPO/$TAG .
 docker tag $REPO/$TAG:latest registry.heroku.com/tfm-diego/$TAG
