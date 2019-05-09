@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
+
+echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin
 echo "$HEROKU_API_KEY" | docker login -u "$HEROKU_USERNAME" --password-stdin registry.heroku.com
-docker login -u $DOCKER_USER -p $DOCKER_PASS
 export REPO=tfm-diego-heroku
 docker pull paberlo/alpine-scikit-django-jdk8:latest
 
