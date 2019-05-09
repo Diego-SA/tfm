@@ -5,7 +5,15 @@ export REPO=tfm-diego-heroku
 docker pull paberlo/alpine-scikit-django-jdk8:latest
 
 echo "login a heroku"
-echo "$HEROKU_API_KEY" | docker login -u "$HEROKU_USERNAME" --password-stdin registry.heroku.com
+#se ha usado el método 2 de:
+#https://stackoverflow.com/questions/39554697/script-heroku-login-in-a-ci-environment
+
+#(
+#  echo "$HEROKU_CREDENTIALS_EMAIL"  # or you can plaintext it, if you're feeling adventurous
+#  echo "$HEROKU_CREDENTIALS_PASSWORD"
+#) | heroku login
+
+#echo "$HEROKU_API_KEY" | docker login -u "$HEROKU_USERNAME" --password-stdin registry.heroku.com
 export TAG=web
 docker build -f $TRAVIS_BUILD_DIR/Dockerfile-heroku-web -t $REPO/$TAG .
 docker tag $REPO/$TAG:latest registry.heroku.com/tfm-diego/$TAG
