@@ -8,17 +8,3 @@ deploy:
   #https://docs.travis-ci.com/user/deployment/script
   script: bash $TRAVIS_BUILD_DIR/travis_deploy.sh
   on: pablo
-#  api_key:
-    #la key se consigue con el comando en local travis encrypt $(heroku auth:token) --add deploy.api_key --pro
-    #el --pro hace falta porque el repo es privado y hace falta usar la versión pro de prueba (travis-ci.com)
-    # ver https://docs.travis-ci.com/user/deployment/heroku/
-    #para login de travis command line en gitbash: winpty ruby `which travis` login
-#    secure: $HEROKU_TOKEN
-#  #rama pablo. Diego usará master
-#  on: pablo
-#  app: tfm-diego
-#after_success:
-
-
-# Invalid credentials cuando intenta hacer login
-#- heroku container:release web worker -a tfm-diego

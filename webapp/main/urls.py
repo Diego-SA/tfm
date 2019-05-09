@@ -4,5 +4,6 @@ from . import views
 
 urlpatterns = [
     path('', views.index, name='index'),
-    path('results', views.results, name='results'),
+    #lo comento porque ya no hay un def results en views.py
+   # path('results', views.results, name='results'),
 ]

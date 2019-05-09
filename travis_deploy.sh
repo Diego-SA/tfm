@@ -4,9 +4,8 @@ echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin
 export REPO=tfm-diego-heroku
 docker pull paberlo/alpine-scikit-django-jdk8:latest
 
-echo "login a heroku"
-#prueba 1:https://stackoverflow.com/questions/39554697/script-heroku-login-in-a-ci-environment
-#prueba 2: echo "$HEROKU_PASSWORD" | docker login -u "$HEROKU_USERNAME" --password-stdin registry.heroku.com
+echo "login a heroku. ignorar el warning porque lo que se usa es el HEROKU API KEY, encriptado."
+#crear en Settings de la app en la web  deheroku la variable HEROKU_API_KEY con la salida del comando en local 'heroku auth:token'
 docker login --username=_ --password=$HEROKU_API_KEY registry.heroku.com
 export TAG=web
 docker build -f $TRAVIS_BUILD_DIR/Dockerfile-heroku-web -t $REPO/$TAG .
