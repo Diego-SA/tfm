@@ -1,5 +1,17 @@
 language: python
 python:
-    - "3.6"
+- '3.6'
 script:
-    - python tests.py
+- python tests.py
+deploy:
+  provider: heroku
+  api_key:
+    secure: kAqVZvc/IfhvYcZ9o23LMg7A0stYGgvD0KlKTPS43lOSa1lQkKA265IiBfB3gT4m9yA6oaKxgS3HnAdq4T7+iLebbz+pPNJWUVVtffo8m+E7K4FJVLztH6quM/QVL5THtUl1iW6AGuZem+UYilr3+opeiPm79j/NZl9g8+ADvYdkwgcPuHU1AGf/VgPqBGjVC+BX+Hj2dUJBb2eYne3MnQ0pNR9U2SSNrRZYaF9PI/rWEFUTZYBb+SysBr0RkJ8ufHwq73c49vNSVCVSt8X9USuMvHpIOtPFbWsNMXNHVG34BnVxTcqiDthDfmZoP7j2jsrnbxbgGmbyb8dgnki7EtFlxvCN0mKlav087ZU7XVLwfQlLf4HHm7rZdihMWG211hYgr5dQnAjgIaBTi71SjlvqePpMvbs9NcsAXYYAB6+ud58joGHgnwCF8NNj79Hr2H7zROZFwr6xdM7DzWV+utju+5Kg/kJhnHYhgLQ6foxLtIRsIjqQALSdCSt2S7Oot8iA8EYtLRRItNga7wJiCkv3OQ8QsG8w9rB4x8zFDxoLh9e11kKfWfoRAx4R2E0GjewOyX/vz9X9DN15DtPc3Xlgdf1bcby94bH6nnHBRaMIwixNtA3tF/V/BwrvpHn5mhKTSVsL2C5hQwepRoZZWatY0xhe95oydv556pDFqmI=
+  app: tfm-diego
+after_success:
+- docker tag tfm-diego-heroku-web:latest registry.heroku.com/tfm-diego/web
+- docker push registry.heroku.com/tfm-diego/web
+- docker tag tfm-diego-worker:latest registry.heroku.com/tfm-diego/worker
+- docker push registry.heroku.com/tfm-diego/worker
+# Invalid credentials cuando intenta hacer login
+#- heroku container:release web worker -a tfm-diego
