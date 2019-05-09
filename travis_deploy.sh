@@ -8,7 +8,7 @@ echo "login a heroku"
 #se ha usado el método 2 de:
 #https://stackoverflow.com/questions/39554697/script-heroku-login-in-a-ci-environment
 
-#echo "$HEROKU_API_KEY" | docker login -u "$HEROKU_USERNAME" --password-stdin registry.heroku.com
+echo "$HEROKU_PASSWORD" | docker login -u "$HEROKU_USERNAME" --password-stdin registry.heroku.com
 export TAG=web
 docker build -f $TRAVIS_BUILD_DIR/Dockerfile-heroku-web -t $REPO/$TAG .
 docker tag $REPO/$TAG:latest registry.heroku.com/tfm-diego/$TAG
