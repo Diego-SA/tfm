@@ -25,5 +25,6 @@ RUN pip3 install requests
 RUN pip3 install gunicorn
 RUN pip3 install GitPython
 RUN pip3 install rq
+RUN pip3 install boto3
 	
 

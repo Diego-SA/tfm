@@ -15,6 +15,8 @@ import os
 import pickle
 import logging
 import zipfile
+import json
+import boto3
 
 windows = False
 
@@ -42,10 +44,24 @@ def index(request):
 			# Obtener el archivo
 			file = request.FILES['file']
 			
+			# Bucket de Amazon S3
+			S3_BUCKET = 'tfm'
+			print("S3_BUCKET: ", S3_BUCKET)
+			
+			print("Archivo a subir: ", file.name)
+			
+			s3 = boto3.client('s3',
+			aws_access_key_id='AKIAJ4HH3WCBQA2Q4ANA',
+			aws_secret_access_key='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')
+
+			s3.upload_file(file.temporary_file_path(), S3_BUCKET, file.name)
+			
+			print("Archivo subido a S3")
+			
 			# Extraer el archivo en el volumen compartido
-			archive = zipfile.ZipFile(file.temporary_file_path(), 'r')
-			archive.extractall('/data')
-			archive.close()
+			#archive = zipfile.ZipFile(file.temporary_file_path(), 'r')
+			#archive.extractall('/data')
+			#archive.close()
 
 			# Mandar trabajo a la cola
 			job1 = q.enqueue(generate_repo_atts, file.name[:-4])
@@ -116,6 +132,7 @@ def generate_repo_atts(file_name):
 	# si no existe, se realiza.
 	project_name = file_name
 	results_dir = 'Results/' + project_name + '/java'
+	file_zip = file_name + '.zip'
 	if not os.path.exists(results_dir):
 
 		if windows:
@@ -123,11 +140,26 @@ def generate_repo_atts(file_name):
 		else:
 			source_meter_link = '../static/sourcemeter-8.2.0-x64-linux/Java/SourceMeterJava'
 
+		# Bucket de Amazon S3
+		S3_BUCKET = 'tfm'
+		
+		s3 = boto3.client('s3',
+		aws_access_key_id='AKIAJ4HH3WCBQA2Q4ANA',
+		aws_secret_access_key='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')
+
+		s3.download_file(S3_BUCKET, file_zip, file_zip)
+		
+		archive = zipfile.ZipFile(file_zip, 'r')
+		archive.extractall()
+		archive.close()
+		
+		print("Archivos: ", os.listdir())
+
 		# Directory where we will save project clone and metrics analysis
-		dir_clone = '/data/'+file_name
+		dir_clone = file_name
 		results = 'Results'
 
-		git_object = git.Git('/data/'+file_name)
+		git_object = git.Git(file_name)
 		# Log con respecto a rama master (apareceran cambios locales)
 		loginfo = git_object.log('origin/master..HEAD')
 		commits = []
@@ -136,7 +168,7 @@ def generate_repo_atts(file_name):
 				commits = commits + [p[7:]]
 		
 		# Objeto Repo para poder coger los commits
-		repo = git.Repo('/data/'+file_name)
+		repo = git.Repo(file_name)
 
 		# Deny all files, then will only allow touched files
 		filter_txt = open("filter.txt", "w")
@@ -387,7 +419,7 @@ def predict_buggy_files(file_name):
 	html = html + "</div></div></body></html>"
 
 	# Clean non-necessary files
-	clean_files('/data/'+file_name)
+	clean_files(file_name)
 
 	return html
 
@@ -404,3 +436,4 @@ def clean_files(dir_project):
 	shutil.rmtree('Results', ignore_errors=True)
 	# Eliminar archivo filter.txt
 	os.remove('filter.txt')
+	

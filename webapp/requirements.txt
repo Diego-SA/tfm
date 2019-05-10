@@ -7,3 +7,4 @@ pandas
 sklearn
 rq
 worker
+boto3
