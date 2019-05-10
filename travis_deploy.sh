@@ -16,4 +16,4 @@ export TAG=worker
 docker build -f $TRAVIS_BUILD_DIR/Dockerfile-worker -t $REPO/$TAG .
 docker tag $REPO/$TAG:latest registry.heroku.com/tfm-diego/$TAG
 docker push registry.heroku.com/tfm-diego/$TAG
-heroku container:release web --app tfm-diego
+heroku container:release web worker --app tfm-diego
