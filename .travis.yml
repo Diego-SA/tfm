@@ -7,4 +7,5 @@ deploy:
   provider: script
   #https://docs.travis-ci.com/user/deployment/script
   script: bash $TRAVIS_BUILD_DIR/travis_deploy.sh
-  on: pablo
+  on: 
+    branch: master
