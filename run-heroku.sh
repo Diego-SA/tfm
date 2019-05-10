@@ -9,5 +9,5 @@ docker push registry.heroku.com/tfm-diego/worker
 
 heroku container:release web worker -a tfm-diego
 #heroku container:release web -a tfm-diego
+heroku open --app tfm-diego
 
-echo "Ahora ve a https://tfm-diego.herokuapp.com/main/"
