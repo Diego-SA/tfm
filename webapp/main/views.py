@@ -64,8 +64,8 @@ def index(request):
 			#archive.close()
 
 			# Mandar trabajo a la cola
-			job1 = q.enqueue(generate_repo_atts, file.name[:-4])
-			time.sleep(4)  # dar tiempo para que job1 acabe rápidamente si ve que ya están los datos
+			job1 = q.enqueue(generate_repo_atts)
+			time.sleep(1)  # dar tiempo para que job1 acabe rápidamente si ve que ya están los datos
 			# no se pueden usar watchdogs porque esto es front end, y el worker se baja las carpetas
 
 			# en su espacio no compartido (heroku no deja compartir volúmenes entre contenedores)
@@ -122,7 +122,7 @@ def index(request):
 						</html>
 				"""
 				return HttpResponse(html)
-			job2 = q.enqueue(predict_buggy_files, file.name[:-4])
+			job2 = q.enqueue(predict_buggy_files)
 			while not job2.status == 'finished':  # es rápido
 				time.sleep(2)
 			return HttpResponse(job2.result)
