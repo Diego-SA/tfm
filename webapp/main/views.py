@@ -63,8 +63,6 @@ def index(request):
 
 			# Mandar trabajo a la cola
 			job1 = q.enqueue(generate_repo_atts, file.name[:-4])
-			print(type(job1))
-			tipo=type(job1)
 			time.sleep(1)  # dar tiempo para que job1 acabe rápidamente si ve que ya están los datos
 			# no se pueden usar watchdogs porque esto es front end, y el worker se baja las carpetas
 
