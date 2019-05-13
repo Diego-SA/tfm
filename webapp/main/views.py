@@ -13,9 +13,7 @@ import redis
 import pandas as pd
 import os
 import pickle
-import logging
 import zipfile
-import json
 import boto3
 
 windows = False
@@ -67,6 +65,7 @@ def index(request):
 			job1 = q.enqueue(generate_repo_atts, file.name[:-4])
 			time.sleep(1)  # dar tiempo para que job1 acabe rápidamente si ve que ya están los datos
 			# no se pueden usar watchdogs porque esto es front end, y el worker se baja las carpetas
+
 			# en su espacio no compartido (heroku no deja compartir volúmenes entre contenedores)
 			if not job1.status == 'finished':
 				html = """
